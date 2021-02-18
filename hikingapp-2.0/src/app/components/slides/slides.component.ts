@@ -18,6 +18,7 @@ export class SlidesComponent implements OnInit {
   ngOnInit() {}
 
   navigateToLogin(){
+    console.log('********navigate to login*****');
     this.route.navigate(['/login']);
   }
 

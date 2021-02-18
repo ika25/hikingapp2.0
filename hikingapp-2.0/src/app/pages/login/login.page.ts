@@ -12,9 +12,13 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
 
-    this.route.navigate(['/home']);
+    //this.route.navigate(['/home']);
   }
 
   
+
+  validateLogin(){ 
+    this.route.navigate(['/home']);
+  }
 
 }
