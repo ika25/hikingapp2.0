@@ -17,8 +17,12 @@ export class SlidesComponent implements OnInit {
 
   ngOnInit() {}
 
-  navigateToHome(){
-    this.route.navigate(['/home']);
+  navigateToLogin(){
+    this.route.navigate(['/login']);
+  }
+
+  navigateToRegister(){
+    this.route.navigate(['/signup']);
   }
 
 }

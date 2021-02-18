@@ -32,8 +32,7 @@ export class FeedPage implements OnInit {
       zoom: 15,
       disableDefaultUI: true
     };
-    console.log(location, options);
-    debugger;
+    console.log(location, options); 
     this.map=new google.maps.Map(this.mapRef.nativeElement,options);
     console.log(this.map);
     

@@ -5,7 +5,7 @@
   </ion-header>
   
   <ion-content padding='true'>
-  <img src="assets/images/logo.png" class="smallLogo"/>
+  <img src="assets/images/logo.jpg" class="smallLogo" />
   <h1>Create Account</h1>
   <form>
   <ion-list>
@@ -27,6 +27,6 @@
   Already have an account? <a routerLink='/login'>Sign in.</a>
   </ion-item>
   </ion-list>
-  <ion-button expand="block" share="round" color="success">Registration</ion-button>
+  <ion-button expand="block" share="round" color="success" (click)="validate()">Registration</ion-button>
   </form>
   </ion-content>

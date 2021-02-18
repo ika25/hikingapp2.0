@@ -12,12 +12,16 @@ const routes: Routes = [
             loadChildren:() => import('../pages/feed/feed.module').then(m => m.FeedPageModule)
         },
         {
-            path:'notifications',
-            loadChildren:() => import('../pages/notifications/notifications.module').then(m => m.NotificationsPageModule)
+            path:'places',
+            loadChildren:() => import('../pages/places/places.module').then(m => m.PlacesPageModule)
         },
         {
-            path:'messages',
-            loadChildren:() => import('../pages/messages/messages.module').then(m => m.MessagesPageModule)
+            path:'record',
+            loadChildren:() => import('../pages/record/record.module').then(m => m.RecordPageModule)
+        },
+        {
+          path:'calories',
+          loadChildren:() => import('../pages/calories/calories.module').then(m => m.CaloriesPageModule)
         },
         {
             path:'settings',

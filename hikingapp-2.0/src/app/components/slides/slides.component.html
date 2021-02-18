@@ -1,27 +1,41 @@
-
-<ion-slides pager={true} options={slideOpts}>
+<ion-header >
+  <ion-toolbar >
+    <ion-buttons slot="start" >
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Ireland Hiking
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen class="ion-padding" scroll-y="false" >
+  <ion-toolbar>
+    <ion-button expand="block" share="round" color="success" (click)="navigateToLogin()">Login</ion-button>
+    <ion-button expand="block" share="round" color="light" (click)="navigateToRegister()">Signup</ion-button>
+ 
+  </ion-toolbar>  
+<ion-slides pager={true} options={slideOpts} centeredSlides="true">
   <ion-slide> 
-    <app-logo></app-logo>  
-    <p>Register and Login</p>
-    <ion-button color="primary"  (click)="navigateToHome()" >   Login  </ion-button>
-    <ion-button color="secondary">Register</ion-button> 
+    <img src='assets/images/logo.jpg' 
+        style="width: 280px; height: 180px;"
+        alt='Ireland Hiking'/>
+        <h2>Login</h2>
+    <p>Signup for new user</p>
+
   </ion-slide>
   <ion-slide>
     <img src='assets/images/calories.jpg' 
-        style="width: 380px; height: 280px;"
+    style="width: 280px; height: 180px;"
         alt='Ireland Hiking'/>
-    <h2>Calories</h2>
-    <p>Built in Calories Burnt Calculator</p>
-    <ion-button color="primary">  Login  </ion-button>
-    <ion-button color="secondary">Register</ion-button> 
+    <h2>Calculator</h2>
+    <p>Measure Calories</p> 
   </ion-slide>
   <ion-slide>
     <img src='assets/images/places.jpg' 
-        style="width: 380px; height: 280px;"
+    style="width: 280px; height: 180px;"
         alt='Ireland Hiking'/>
     <h2>Places</h2>
-    <p>Explore Places</p>
-    <ion-button color="primary">  Login  </ion-button>
-    <ion-button color="secondary">Register</ion-button> 
+    <p>Explore Places</p>  
   </ion-slide>
 </ion-slides>
+</ion-content>
