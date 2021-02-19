@@ -11,6 +11,7 @@ import {ViewChild,ElementRef} from '@angular/core';
 export class FeedPage implements OnInit {
 
   map: any;
+  
 
   // @ViewChild('map',{read: ElementRef, static: false}) mapRef: ElementRef;
   @ViewChild('map') mapRef: ElementRef;

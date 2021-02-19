@@ -1,9 +1,38 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>calories</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+<ion-split-pane contentId="content">
+  <ion-menu contentId="content"  menuId="first">
+  
+    <ion-header>
+        <ion-toolbar color="primary">
+            <ion-title>
+                Menu 1
+            </ion-title>
+  
+        </ion-toolbar>
+  
+    </ion-header>
+  
+    <ion-content>
+      <ion-list>
+          <ion-menu-toggle auto-hide="false" menu="first">
+              <ion-item routerLink="news" routerDirection="root" routerLinkActive="active-item">
+                <ion-label>
+                  News
+                </ion-label>
+              </ion-item>
+              <ion-item routerLink="notifications" routerDirection="root" routerLinkActive="active-item">
+                <ion-label>
+                  Upcoming Hikings
+                </ion-label>
+              </ion-item>
+              
+          </ion-menu-toggle>
+      </ion-list>  
+    </ion-content>
+  
+  </ion-menu>
+  
+  <ion-router-outlet id="content">
+  
+  </ion-router-outlet>
+  
+  </ion-split-pane>

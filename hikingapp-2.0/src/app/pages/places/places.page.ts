@@ -1,49 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  GoogleMapOptions,
-  CameraPosition,
-  MarkerOptions,
-  Marker,
-  Environment
-} from '@ionic-native/google-maps'; 
-import { Platform } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core'; 
+import { GoogleMaps, GoogleMapsEvent, LatLng, MarkerOptions, Marker } from "@ionic-native/google-maps";
 
+import { Platform } from "@ionic/angular";
 
 @Component({
   selector: 'app-places',
   templateUrl: './places.page.html',
   styleUrls: ['./places.page.scss'],
 })
-export class PlacesPage implements OnInit {
+export class PlacesPage   {
 
-  map: GoogleMap;
+  constructor(public platform: Platform) { }
 
-  constructor(private platform:Platform) { }
-
-  ionViewDidLoad() {
-    this.loadMap();
+  ngAfterViewInit() {
+		this.platform.ready().then(() => this.loadMap());
   }
-
-  async ngOnInit() {
-    await this.platform.ready();
-    await this.loadMap();
-  }
-
+  
   loadMap() {
+		/* The create() function will take the ID of your map element */
+		const map = GoogleMaps.create('map');
 
-    // This code is necessary for browser
-    Environment.setEnv({
-      'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyD6wz-2LPTEqkqAtgA_0Mk-IIraeM7WvoQ',
-      'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyD6wz-2LPTEqkqAtgA_0Mk-IIraeM7WvoQ'
-    });
+		map.one( GoogleMapsEvent.MAP_READY ).then((data: any) => {
+			const coordinates: LatLng = new LatLng(41, -87);
 
-    
-
-    this.map = GoogleMaps.create('map_canvas');
- 
-  }
+			map.setCameraTarget(coordinates);
+			map.setCameraZoom(8);
+		});
+	}
 
 }

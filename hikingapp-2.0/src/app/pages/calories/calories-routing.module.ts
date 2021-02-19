@@ -6,7 +6,22 @@ import { CaloriesPage } from './calories.page';
 const routes: Routes = [
   {
     path: '',
-    component: CaloriesPage
+    component: CaloriesPage,
+    children: [
+      {
+        path: 'news',
+        loadChildren: () => import('../../pages/messages/messages.module').then( m => m.MessagesPageModule)
+      },
+      {
+        path: 'notifications',
+        loadChildren: () => import('../../pages/notifications/notifications.module').then( m => m.NotificationsPageModule)
+      },
+      {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full'
+      }
+    ]
   }
 ];
 
