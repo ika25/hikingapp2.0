@@ -1,13 +1,10 @@
-ion-title.large-title {
-    color: purple;
-    font-size: 30px;
-  }
+ 
+ion-slides {
+      height: 200px;
+ }
 
-  .img{
-    width: 50px !important;
-    height: 50px !important;
-    border-radius: 20% !important;
-    overflow: hidden !important; 
-  }
-
-   
+ .header-banner{ 
+  height:200px;
+  min-height:200px;
+  background:red;
+}

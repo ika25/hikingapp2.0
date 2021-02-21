@@ -1,41 +1,45 @@
-<ion-header >
-  <ion-toolbar >
+<ion-header  >
+  <ion-toolbar color="dark">
     <ion-buttons slot="start" >
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Ireland Hiking
+      Welcome to Ireland Hiking
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content fullscreen class="ion-padding" scroll-y="false" >
-  <ion-toolbar>
-    <ion-button expand="block" share="round" color="success" (click)="navigateToLogin()">Login</ion-button>
-    <ion-button expand="block" share="round" color="light" (click)="navigateToRegister()">Signup</ion-button>
  
-  </ion-toolbar>  
-<ion-slides pager={true} options={slideOpts} centeredSlides="true">
-  <ion-slide> 
-    <img src='assets/images/logo.jpg' 
-        style="width: 280px; height: 180px;"
-        alt='Ireland Hiking'/>
-        <h2>Login</h2>
-    <p>Signup for new user</p>
 
+  
+<ion-toolbar>
+  <ion-button expand="block" share="round" color="success" (click)="navigateToLogin()">Login</ion-button>
+  <ion-button expand="block" share="round" color="light" (click)="navigateToRegister()">Signup</ion-button> 
+</ion-toolbar> 
+
+<ion-content  color="Tint"> 
+<ion-slides pager={true} options={slideOpts} >
+  <ion-slide >  
+    <h2><b>Plan your trip</b></h2> 
+    <p>Handy recommendations and suggestions</p>  
+    <img src='assets/images/logo.jpg'     alt='Ireland Hiking'/>   
+       
   </ion-slide>
   <ion-slide>
-    <img src='assets/images/calories.jpg' 
-    style="width: 280px; height: 180px;"
+    <h2><b>Calories Calcualtor</b></h2> 
+    <p>Know the calories burnt with steps calculator</p> 
+    <img src='assets/images/calories.jpg'  
         alt='Ireland Hiking'/>
-    <h2>Calculator</h2>
-    <p>Measure Calories</p> 
   </ion-slide>
   <ion-slide>
-    <img src='assets/images/places.jpg' 
-    style="width: 280px; height: 180px;"
-        alt='Ireland Hiking'/>
-    <h2>Places</h2>
-    <p>Explore Places</p>  
+    <h2><b>Record your trip</b></h2> 
+    <p>Record your trips </p>
+    <img src='assets/images/places.jpg'  
+        alt='Ireland Hiking'/> 
   </ion-slide>
-</ion-slides>
+</ion-slides> 
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>Footer</ion-title>
+  </ion-toolbar>
+</ion-footer>

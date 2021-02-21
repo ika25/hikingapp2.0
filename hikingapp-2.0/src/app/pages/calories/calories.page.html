@@ -4,43 +4,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-split-pane contentId="content">
-  <ion-menu contentId="content"  menuId="first">
-  
-    <ion-header>
-        <ion-toolbar color="primary">
-            <ion-title>
-                Menu 1
-            </ion-title>  
-        </ion-toolbar>  
-    </ion-header>  
-    <ion-content>
-      <ion-list>
-          <ion-menu-toggle auto-hide="false" menu="first">
-              <ion-item routerLink="news" routerDirection="root" routerLinkActive="active-item">
-                <ion-label>
-                  News
-                </ion-label>
-              </ion-item>
-              <ion-item routerLink="notifications" routerDirection="root" routerLinkActive="active-item">
-                <ion-label>
-                  Upcoming Hikings
-                </ion-label>
-              </ion-item>              
-          </ion-menu-toggle>
-      </ion-list>  
-    </ion-content>
-  
-  </ion-menu>
-  
-  <ion-router-outlet id="content">
-  
-  </ion-router-outlet>
-  
-  </ion-split-pane>
 
-
-  <ion-content id='foo'>
+<ion-content id='hotspots' [scrollEvents]="true">
   <ion-list>
     <ion-list-header color="secondary" lines="full">
       <h3>Popular Hiking spots</h3>
@@ -155,7 +120,7 @@
 <ion-item>   
   <img src="assets/images/SlieveGullion.jpg">       
 </ion-item>
-
+ 
 <ion-item-divider>
   <ion-label>
     <ion-text color="warning">
@@ -178,10 +143,58 @@
  
   </ion-list>
 </ion-content>
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Loading more data...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-   
+
+<ion-split-pane contentId="content">
+  <ion-menu contentId="content"  menuId="first">
+  
+    <ion-header>
+        <ion-toolbar color="primary">
+            <ion-title>
+                Menu 1
+            </ion-title>  
+        </ion-toolbar>  
+    </ion-header>  
+    <ion-content>
+      <ion-list>
+          <ion-menu-toggle auto-hide="false" menu="first">
+              <ion-item routerLink="news" routerDirection="root" routerLinkActive="active-item">
+                <ion-label>
+                  Events 
+                </ion-label>
+              </ion-item>
+              <ion-item routerLink="notifications" routerDirection="root" routerLinkActive="active-item">
+                <ion-label>
+                  News 
+                </ion-label>
+              </ion-item> 
+              <ion-item routerLink="messages" routerDirection="root" routerLinkActive="active-item">
+                <ion-label>
+                  My Favourites 
+                </ion-label>
+              </ion-item>     
+              <ion-item routerLink="messages" routerDirection="root" routerLinkActive="active-item">
+                <ion-label>
+                  Planned Hikings 
+                </ion-label>
+              </ion-item>    
+              <ion-item routerLink="messages" routerDirection="root" routerLinkActive="active-item">
+                <ion-label>
+                  Calories Calculator
+                </ion-label>
+              </ion-item>  
+              <ion-item routerLink="messages" routerDirection="root" routerLinkActive="active-item">
+                <ion-label>
+                  Covid-19 
+                </ion-label>
+              </ion-item>      
+          </ion-menu-toggle>
+      </ion-list>  
+    </ion-content>
+  
+  </ion-menu>
+  
+  <ion-router-outlet id="content">
+  
+  </ion-router-outlet>
+  
+  </ion-split-pane>
