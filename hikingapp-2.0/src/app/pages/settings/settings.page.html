@@ -1,9 +1,27 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>settings</ion-title>
+<ion-header style="background-color: red">
+  <ion-toolbar  class="header-color" >
+    <ion-title  > Settings</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content> 
+
+<!-- Toggles in a List -->
+<ion-list>
+  <ion-item>
+    <ion-label>Subscribe Notifications</ion-label>
+    <ion-toggle [(ngModel)]="pepperoni"></ion-toggle>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>subscribe News</ion-label>
+    <ion-toggle [(ngModel)]="sausage" disabled="false"></ion-toggle>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Calories Tracking</ion-label>
+    <ion-toggle [(ngModel)]="mushrooms"></ion-toggle>
+  </ion-item>
+</ion-list>
 
 </ion-content>

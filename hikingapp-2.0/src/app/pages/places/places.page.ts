@@ -21,7 +21,7 @@ export class PlacesPage   {
 		const map = GoogleMaps.create('map');
 
 		map.one( GoogleMapsEvent.MAP_READY ).then((data: any) => {
-			const coordinates: LatLng = new LatLng(41, -87);
+			const coordinates: LatLng = new LatLng(53.2734, -7.77832031);
 
 			map.setCameraTarget(coordinates);
 			map.setCameraZoom(8);
