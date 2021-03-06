@@ -7,26 +7,26 @@
   <ion-content padding='true'>
   <img src="assets/images/logo.jpg" class="smallLogo" />
   <h1>Create Account</h1>
-  <form>
+ 
   <ion-list>
   <ion-item>
   <ion-label position="stacked">Email</ion-label>
-  <ion-input autocomplete="off" type="email"></ion-input>
+  <ion-input autocomplete="off" type="email"  [(ngModel)]="email"></ion-input>
   </ion-item>
   <ion-item>
   <ion-label position="stacked">Username</ion-label>
-  <ion-input autocomplete="off" type="text"></ion-input>
+  <ion-input autocomplete="off" type="text"  [(ngModel)]="username"></ion-input>
   </ion-item>
   
   <ion-item>
   <ion-label position="stacked">Password</ion-label>
-  <ion-input autocomplete="off" type="password"></ion-input>
+  <ion-input autocomplete="off" type="password" [(ngModel)]="password"></ion-input>
   </ion-item>
   
   <ion-item lines='none'>
   Already have an account? <a routerLink='/login'>Sign in.</a>
   </ion-item>
   </ion-list>
-  <ion-button expand="block" share="round" color="success" (click)="validate()">Registration</ion-button>
-  </form>
+  <ion-button expand="block" share="round" color="success" (click)="register()">Registration</ion-button>
+  
   </ion-content>

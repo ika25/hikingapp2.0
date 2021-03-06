@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class SignupPage implements OnInit {
 
-  username: string = ""
+	email: string = ""
 	password: string = ""
 
   constructor(
@@ -23,27 +23,20 @@ export class SignupPage implements OnInit {
   ngOnInit() {
   }
 
-  validate(){      
-      this.route.navigate(['/login']);
-  }
-
+ 
   async register() {
-		const { username, password } = this 
+		const { email, password } = this 
 		try {
-			const res = await this.afAuth.createUserWithEmailAndPassword(username , password)	 
-			this.presentAlert('Success', 'You are registered!')
-			this.router.navigate(['/tabs']) 
+			console.log('usernmae='+email);
+			const res = await this.afAuth.createUserWithEmailAndPassword(email , password)
+			console.log(res)	 
+			//this.presentAlert('Success', 'You are registered!')
+			//this.router.navigate(['/tabs']) 
 		} catch(error) {
 			console.dir(error)
 		}
-  }
-  
-
-  
-	async presentAlert(title: string, content: string) {
-		 
- 
-
+  } 
+	async presentAlert(title: string, content: string) { 
 	 
 	}
 

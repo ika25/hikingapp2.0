@@ -22,19 +22,19 @@ export class UserService {
 	getUsername(): string {
 		return this.user.username
 	}
-
+/*
 	reAuth(username: string, password: string) {
-		return this.afAuth.auth.currentUser.reauthenticateWithCredential(auth.EmailAuthProvider.credential(username + '@codedamn.com', password))
+		return this.afAuth.currentUser.reauthenticateWithCredential(EmailAuthProvider.credential(username , password))
 	}
 
 	updatePassword(newpassword: string) {
-		return this.afAuth.auth.currentUser.updatePassword(newpassword)
+		return this.afAuth.updateCurrentUser.currentUser.updatePassword(newpassword)
 	}
 
 	updateEmail(newemail: string) {
-		return this.afAuth.auth.currentUser.updateEmail(newemail + '@codedamn.com')
+		return this.afAuth.currentUser.updateEmail(newemail + '@codedamn.com')
 	}
-
+*/
 	async isAuthenticated() {
 		if(this.user) return true
 
