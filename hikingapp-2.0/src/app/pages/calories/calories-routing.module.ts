@@ -17,6 +17,11 @@ const routes: Routes = [
         loadChildren: () => import('../../pages/notifications/notifications.module').then( m => m.NotificationsPageModule)
       },
       {
+        path: 'upload',
+        loadChildren: () => import('../../pages/calories/upload/upload.module').then( m => m.UploadPageModule)
+      },
+
+      {
         path: '',
         redirectTo: 'login',
         pathMatch: 'full'
