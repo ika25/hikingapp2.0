@@ -20,7 +20,7 @@ import {
 import { Platform } from '@ionic/angular'; 
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { RouteReuseStrategy } from '@angular/router';
-
+ 
 
 @NgModule({
   imports: [
