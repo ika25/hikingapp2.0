@@ -1,3 +1,55 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-split-pane contentId="content">
+    <ion-menu contentId="content" menuId="first">
+
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>
+            Menu 1
+          </ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false" menu="first">
+            <ion-item routerLink="news" routerDirection="root" routerLinkActive="active-item">
+              <ion-label>
+                News/Events
+              </ion-label>
+            </ion-item>
+            <ion-item routerLink="upload" routerDirection="backward" routerLinkActive="active-item">
+              <ion-label>
+                Upload
+              </ion-label>
+            </ion-item>
+            <ion-item routerLink="messages" routerDirection="root" routerLinkActive="active-item">
+              <ion-label>
+                My Favourites
+              </ion-label>
+            </ion-item>
+            <ion-item routerLink="messages" routerDirection="root" routerLinkActive="active-item">
+              <ion-label>
+                Planned Hikings
+              </ion-label>
+            </ion-item>
+            <ion-item routerLink="messages" routerDirection="root" routerLinkActive="active-item">
+              <ion-label>
+                Calories Calculator
+              </ion-label>
+            </ion-item>
+            <ion-item routerLink="messages" routerDirection="root" routerLinkActive="active-item">
+              <ion-label>
+                Covid-19
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+
+    </ion-menu>
+
+    <ion-router-outlet id="content"></ion-router-outlet>
+
+  </ion-split-pane>
+  <!-- <ion-router-outlet></ion-router-outlet> -->
 </ion-app>

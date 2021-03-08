@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { AngularFireAuth } from '@angular/fire/auth'
+import { Storage } from '@ionic/storage'
 import { first } from 'rxjs/operators' 
 
 interface user {
@@ -9,14 +10,19 @@ interface user {
 
 @Injectable()
 export class UserService {
-	private user: user
 
-	constructor(private afAuth: AngularFireAuth) {
+	user: user
+
+	constructor(
+		private afAuth: AngularFireAuth,
+		private storage: Storage
+		) {
 
 	}
 
 	setUser(user: user) {
 		this.user = user
+		this.storage.set('u_data', user);
 	}
 
 	getUsername(): string {

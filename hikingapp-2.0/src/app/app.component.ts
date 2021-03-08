@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { UserService } from './user.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-root',
@@ -13,13 +15,23 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private userService: UserService,
+    private storage: Storage,
+    private navCtrl: NavController
   ) {
     this.initializeApp();
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
+  async initializeApp() {
+    this.platform.ready().then(async () => {
+      var user = await this.storage.get('u_data');
+      if (user) {
+        this.userService.user = user;
+        this.navCtrl.navigateRoot('home/calories');
+      } else {
+        this.navCtrl.navigateRoot('login')
+      }
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });

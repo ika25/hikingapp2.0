@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: '',
-    loadChildren: () => import('./index/index.module').then(m => m.IndexPageModule)
-  },
+  // {
+  //   path: '',
+  //   loadChildren: () => import('./index/index.module').then(m => m.IndexPageModule)
+  // },
   {
     path: '',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
@@ -24,7 +24,19 @@ const routes: Routes = [
   {
     path: 'record',
     loadChildren: () => import('./pages/record/record.module').then( m => m.RecordPageModule)
-  } 
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'signup',
+    loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
+  }
 
 ];
 @NgModule({

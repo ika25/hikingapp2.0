@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 import { UserService } from '../../user.service';
 import { AlertController } from '@ionic/angular';
+import { CommonService } from 'src/app/services/common.services';
 
 
 @Component({
@@ -14,12 +15,14 @@ import { AlertController } from '@ionic/angular';
 export class LoginPage implements OnInit {
 
   username: string = ""
-	password: string = ""
+  password: string = ""
 
   constructor(private route: Router,
     public alertController: AlertController,
     public user: UserService,
-     public afAuth: AngularFireAuth) { }
+    public afAuth: AngularFireAuth,
+    private comService: CommonService
+  ) { }
 
   ngOnInit() {
 
@@ -28,42 +31,43 @@ export class LoginPage implements OnInit {
 
 
   async presentAlert(title: string, content: string) {
-		const alert = await this.alertController.create({
-			header: title,
-			message: content,
-			buttons: ['OK']
-		})
+    const alert = await this.alertController.create({
+      header: title,
+      message: content,
+      buttons: ['OK']
+    })
 
-		await alert.present()
+    await alert.present()
   }
-  
+
   async validateLogin() {
     const { username, password } = this
 
-    try{
-      const res = await this.afAuth.signInWithEmailAndPassword(username , password)
-      console.log(res)
+    try {
+      await this.comService.showLoader('')
+      const res = await this.afAuth.signInWithEmailAndPassword(username, password)
+      console.log('res == ', res)
 
-      if(res.user) {
-				this.user.setUser({
-					username,
-					uid: res.user.uid
+      if (res.user) {
+        this.user.setUser({
+          username,
+          uid: res.user.uid
         })
-        
-        this.presentAlert('Success', 'You are registered!')		 
-				this.route.navigate(['home'])
+        this.comService.hideLoader()
+        // this.presentAlert('Success', 'You are registered!')
+        this.comService.showToast("Loged in now");
+        this.route.navigate(['home/calories'])
+      } else {
+        this.comService.hideLoader()
       }
-      
-    } catch(err) {
-			console.dir(err)
-			if(err.code === "auth/user-not-found") {
-        console.log("User not found")
-        
-			}
-		}
-    
-	}
+    } catch (err) {
+      console.dir('error == ', err)
+      this.comService.hideLoader()
+      this.comService.showToast(err.message)
+    }
 
-  
+  }
+
+
 
 }

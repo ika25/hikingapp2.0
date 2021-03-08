@@ -8,35 +8,39 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import firebaseConfig from './firebase';  
+import firebaseConfig from './firebase';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { UserService } from './user.service';
 import { AuthService } from './auth.service';
- 
+import { FormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms'
 import { ShareModule } from './share.module';
- 
+import { IonicStorageModule } from '@ionic/storage';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, 
+  imports: [BrowserModule,
     IonicModule.forRoot(),
-     AppRoutingModule,
+    AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    IonicStorageModule.forRoot(),
     AngularFireAuthModule,
     AngularFirestoreModule,
-  
-	  ShareModule
+    ReactiveFormsModule,//Add if needed 
+    FormsModule,
+    ShareModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     UserService,
-	  AuthService
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

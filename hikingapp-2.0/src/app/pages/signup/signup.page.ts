@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { UserService } from '../../user.service';
 import { AngularFirestore } from '@angular/fire/firestore'
+import { CommonService } from 'src/app/services/common.services';
 
 @Component({
   selector: 'app-signup',
@@ -22,31 +23,37 @@ export class SignupPage implements OnInit {
 		public afstore: AngularFirestore,
 		public user: UserService,
 		public alertController: AlertController,
-		public router: Router) { }
+		public router: Router,
+		private comService: CommonService
+		) { }
 
   ngOnInit() {
   }
 
  
   async register() {
-		const { email, password,username } = this 
+		const { email, password, username } = this 
 		try {
-			console.log('usernmae='+email);
+			console.log('username = ' + email);
+			await this.comService.showLoader('');
 			const res = await this.afAuth.createUserWithEmailAndPassword(email , password)
 			console.log(res)	 
-			this.afstore.doc(`users/${res.user.uid}`).set({
+			await this.afstore.doc(`users/${res.user.uid}`).set({
 				email
-			})
+			});
 
 			this.user.setUser({
 				username,
 				uid: res.user.uid
-			})
+			});
 
-			this.presentAlert('Success', 'You are registered!')
-			this.router.navigate(['/login']) 
+			this.comService.hideLoader();
+			this.comService.showToast('You are registered successfully!');			
+			this.router.navigate(['/login']);
 		} catch(error) {
-			console.dir(error)
+			console.dir(error);
+			this.comService.hideLoader()
+			this.comService.showAlert(error.error);
 		}
   } 
 
