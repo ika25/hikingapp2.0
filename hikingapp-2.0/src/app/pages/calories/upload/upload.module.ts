@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { UploadPageRoutingModule } from './upload-routing.module';
 
-import { UploadPage } from './upload.page'; 
+import { UploadPage } from "./UploadPage";
 
 @NgModule({
   imports: [

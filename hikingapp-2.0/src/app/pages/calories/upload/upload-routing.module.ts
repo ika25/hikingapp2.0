@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
-import { UploadPage } from './upload.page';
+import { UploadPage } from "./UploadPage";
 import { ShareModule } from '../../../share.module';
 
 

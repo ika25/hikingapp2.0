@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { UploadPage } from './upload.page';
+import { UploadPage } from "./UploadPage";
 
 describe('UploadPage', () => {
   let component: UploadPage;
