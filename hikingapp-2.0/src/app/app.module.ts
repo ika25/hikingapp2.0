@@ -15,7 +15,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { UserService } from './user.service';
 import { AuthService } from './auth.service';
-
+ 
+import { ShareModule } from './share.module';
  
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,9 @@ import { AuthService } from './auth.service';
      AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+  
+	  ShareModule
   ],
   providers: [
     StatusBar,
