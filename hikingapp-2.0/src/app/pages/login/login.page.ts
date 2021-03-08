@@ -43,6 +43,9 @@ export class LoginPage implements OnInit {
   async validateLogin() {
     const { username, password } = this
 
+    this.route.navigate(['home/calories'])
+    return;
+
     try {
       await this.comService.showLoader('')
       const res = await this.afAuth.signInWithEmailAndPassword(username, password)
