@@ -20,6 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { ShareModule } from './share.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+
+import { HttpClientModule } from '@angular/common/http';
      
 
 
@@ -35,9 +37,11 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     AngularFirestoreModule,
     ReactiveFormsModule,//Add if needed 
     FormsModule,
-    ShareModule
+    ShareModule,
+    HttpClientModule    
   ],
   providers: [
+    HttpClientModule,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 

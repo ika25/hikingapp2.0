@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CovidService } from '../../services/covid19.service';
+import { CovidService } from '../../services/covid.service';
 
 @Component({
   selector: 'app-covid19',
@@ -12,7 +12,7 @@ export class Covid19Page {
 
   constructor(private covidService: CovidService) { 
 
-    this.covidService.getAll().subscribe((data)=>{
+    this.covidService.getCountries().subscribe((data)=>{
       this.info = data;
     });
 
