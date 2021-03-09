@@ -105,4 +105,5 @@
     <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
         <string>This App wants to track your location</string>
     </edit-config>
+    <allow-navigation href="http://localhost:8100" sessionid="fa2458c5" />
 </widget>
