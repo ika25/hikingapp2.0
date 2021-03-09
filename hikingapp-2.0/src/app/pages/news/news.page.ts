@@ -1,16 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component } from '@angular/core';
+import { ApiService } from '../../services/api.service';
 
 @Component({
-  selector: 'app-news',
-  templateUrl: './news.page.html',
-  styleUrls: ['./news.page.scss'],
+  selector: 'news-home',
+  templateUrl: 'news.page.html',
+  styleUrls: ['news.page.scss'],
 })
-export class NewsPage implements OnInit {
+export class NewsPage {
+  
+  articles;
 
-  constructor() { }
+  constructor(private apiService: ApiService){}
 
-  ngOnInit() {
+  ionViewDidEnter(){
+
+    this.apiService.getNews().subscribe((data)=>{
+      console.log(data);
+      this.articles = data['articles'];
+    });
   }
-
 }

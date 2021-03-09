@@ -40,6 +40,14 @@ const routes: Routes = [
   {
     path: 'upload',
     loadChildren: () => import('./pages/upload/upload.module').then( m => m.UploadPageModule)
+  },
+  {
+    path: 'news',
+    loadChildren: () => import('./pages/news/news.module').then( m => m.NewsPageModule)
+  },
+  {
+    path: 'covid19',
+    loadChildren: () => import('./pages/covid19/covid19.module').then( m => m.Covid19PageModule)
   }
 
 ];
