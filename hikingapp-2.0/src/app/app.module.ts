@@ -19,6 +19,9 @@ import { FormsModule } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms'
 import { ShareModule } from './share.module';
 import { IonicStorageModule } from '@ionic/storage';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+     
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,9 +40,9 @@ import { IonicStorageModule } from '@ionic/storage';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     UserService,
-    AuthService
+    AuthService 
   ],
   bootstrap: [AppComponent]
 })

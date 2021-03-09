@@ -16,6 +16,8 @@ import {
 } from "@ionic-native/google-maps";
 
 import { Platform } from "@ionic/angular";
+import { Geolocation } from '@ionic-native/geolocation';
+
 
 @Component({
 	selector: 'app-places',
@@ -24,13 +26,14 @@ import { Platform } from "@ionic/angular";
 })
 
 export class PlacesPage {
-
+ 
 	map: GoogleMap;
 	loading: any;
 
 	constructor(
 		public loadingCtrl: LoadingController,
 		public toastCtrl: ToastController,
+		private geolocation: Geolocation,
 		private platform: Platform) { }
 
 	async ngOnInit() {

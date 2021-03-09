@@ -19,6 +19,7 @@ import { Platform } from '@ionic/angular';
 })
 export class FeedPage implements OnInit {
 
+  map_canvas: any;
   map: any;
   map1: GoogleMap;
   
