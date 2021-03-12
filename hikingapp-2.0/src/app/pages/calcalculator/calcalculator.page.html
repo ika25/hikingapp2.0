@@ -1,9 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>calcalculator</ion-title>
+    <ion-title>Calories Calculator</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Calculate calories require for your hike trip
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content [fullscreen]="true">
+
+  <ion-list lines="none">
+  <ion-item>
+    <ion-label position="floating">First Name</ion-label>
+    <ion-input formControlName="firstName" type="text"></ion-input>
+</ion-item>
+
+<ion-item>
+    <ion-label position="floating">Last Name</ion-label>
+    <ion-input formControlName="lastName" type="text"></ion-input>
+</ion-item>
+
+<ion-item>
+    <ion-label position="floating">Age</ion-label>
+    <ion-input formControlName="age" type="number"></ion-input>
+</ion-item>
+</ion-list>
 </ion-content>

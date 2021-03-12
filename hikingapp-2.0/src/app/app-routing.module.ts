@@ -52,6 +52,10 @@ const routes: Routes = [
   {
     path: 'calcalculator',
     loadChildren: () => import('./pages/calcalculator/calcalculator.module').then( m => m.CalcalculatorPageModule)
+  },
+  {
+    path: 'calculator',
+    loadChildren: () => import('./pages/calculator/calculator.module').then( m => m.CalculatorPageModule)
   }
 
 ];
