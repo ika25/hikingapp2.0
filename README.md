@@ -16,7 +16,7 @@ alt="GMIT Logo" width="500" height="200"/>
 | **Course**              | BSc (Hons) in Software Development |
 | **Module**              | APPLIED PROJECT AND MINOR DISSERTATION |
 | **Institute**           | [Galway-Mayo Institute of Technology](https://www.gmit.ie/) |
-| **Student**             | [John Shields](https://github.com/johnshields) |
+| **Student**             | [Irakli Lomidze](https://github.com/) |
 | **Module Lecturer**      | Dr. Dominic Carr |
 
 ***
