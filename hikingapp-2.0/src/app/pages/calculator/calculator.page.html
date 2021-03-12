@@ -2,18 +2,14 @@
   <ion-toolbar>
     <ion-title>Calories Calculator</ion-title>
   </ion-toolbar>
-</ion-header>
-
+</ion-header> 
 <ion-content>
   <ion-button expand="block" share="round" color="success" (click)="calculate()">Calculate</ion-button>
-  <ion-list lines="none">
- 
-
+  <ion-list lines="none"> 
   <ion-item>
     <ion-label position="stacked" class="testclass">Your Weight</ion-label>
     <ion-input placeholder="Enter your weight"></ion-input>
-  </ion-item>
-
+  </ion-item> 
   <ion-item>
     <ion-label position="stacked" class="testclass">Backpack Weight</ion-label>
     <ion-input placeholder="Enter Backpack Weight"></ion-input>
@@ -73,9 +69,19 @@
       <ion-label>Downhill only</ion-label>
       <ion-radio slot="start" color="tertiary" value="downonly"></ion-radio>
     </ion-item> 
-  </ion-radio-group> 
-  
-
-  
-
+  </ion-radio-group>  
 </ion-content>
+<script>
+  const button = document.querySelector('ion-button');
+  button.addEventListener('click', handleButtonClick);
+
+  async function handleButtonClick() {
+    const alert = await alertController.create({
+      header: 'Use this lightsaber?',
+      message: 'Do you agree to use this lightsaber to do good across the galaxy?',
+      buttons: ['Disagree', 'Agree']
+    });
+
+    await alert.present();
+  }
+</script>

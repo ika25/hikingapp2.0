@@ -69,8 +69,6 @@ export class LoginPage implements OnInit {
       this.comService.showToast(err.message)
     }
 
-  }
-
-
+  } 
 
 }
