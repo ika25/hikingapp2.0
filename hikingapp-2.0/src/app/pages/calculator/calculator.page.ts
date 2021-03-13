@@ -13,7 +13,7 @@ export class CalculatorPage implements OnInit {
     
   } 
   
-  async calculate() {
+  async calculate() { 
     console.log('(((((( in claculate))))))))');
     const alert = await this.alertController.create({ 
       header: 'Alert',
