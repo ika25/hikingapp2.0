@@ -1,120 +1,160 @@
-import { Component, OnInit } from '@angular/core';
-import {ViewChild,ElementRef} from '@angular/core';
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  ILatLng,
-  Marker,
-  BaseArrayClass
-} from '@ionic-native/google-maps';
-import { Platform } from '@ionic/angular';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Plugins } from '@capacitor/core';
+import { AlertController,	LoadingController, } from '@ionic/angular';
 
- declare var google: any;
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+
+import {
+  AngularFirestore,
+  AngularFirestoreCollection
+} from '@angular/fire/firestore';
+
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+//import	{	GoogleMapComponent	}	from	'../../components/google-map/google-map.component'; 
+
+const { Geolocation } = Plugins;
+
+declare var google;
 
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.page.html',
   styleUrls: ['./feed.page.scss'],
 })
-export class FeedPage implements OnInit {
+export class FeedPage {
 
-  map_canvas: any;
+  // Firebase Data
+  locations: Observable<any>;
+  locationsCollection: AngularFirestoreCollection<any>;
+
+  // Map related
+  @ViewChild('map') mapElement: ElementRef;
   map: any;
-  map1: GoogleMap;
+  markers = [];
+  loc : any;
   
-
-  // @ViewChild('map',{read: ElementRef, static: false}) mapRef: ElementRef;
-  @ViewChild('map') mapRef: ElementRef;
-
-
-  constructor(private platform: Platform) { }
-
-  async ngOnInit() {
-    await this.platform.ready();
-    await this.loadMap();
+  // Misc
+  isTracking = false;
+  watch: string;
+  user = null;
+  
+  constructor(private afs: AngularFirestore) {
+    this.anonLogin();
   }
-
-  ionViewDidEnter(){
+  
+  ionViewWillEnter() {
     this.loadMap();
   }
 
+
+  // Perform an anonymous login and load data
+  anonLogin() {
+    firebase.auth().onAuthStateChanged(user => { 
+      this.user = user;
  
+      this.locationsCollection = this.afs.collection(
+        `locations/${this.user.uid}/track`,
+        ref => ref.orderBy('timestamp')
+      );
+ 
+      // Make sure we also get the Firebase item ID!
+      this.locations = this.locationsCollection.snapshotChanges().pipe(
+        map(actions =>
+          actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          })
+        )
+      );
+ 
+      // Update Map marker on every change
+      this.locations.subscribe(locations => {
+        this.updateMap(locations);
+        this.loc=locations;
+      });
+    });
+  }
 
-
+  // Initialize a blank map
   loadMap() {
-    let POINTS: BaseArrayClass<any> = new BaseArrayClass<any>([
-      {
-        position: {lat:41.79883, lng:140.75675},
-        iconData: "./assets/imgs/Number-1-icon.png"
-      },
-      {
-        position: {lat:41.799240000000005, lng:140.75875000000002},
-        iconData: "https://mapsplugin.github.io/ionic-googlemaps-quickdemo-v4/assets/imgs/Number-2-icon.png"
-      },
-      {
-        position: {lat:41.797650000000004, lng:140.75905},
-        iconData: {
-          url: "https://mapsplugin.github.io/ionic-googlemaps-quickdemo-v4/assets/imgs/Number-3-icon.png",
-          size: {
-            width: 24,
-            height: 24
-          }
-        }
-      },
-      {
-        position: {lat:41.79637, lng:140.76018000000002},
-        title: "4",
-        iconData: "blue"
-      },
-      {
-        position: {lat:41.79567, lng:140.75845},
-        title: "5",
-        iconData:  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAACVUlEQVRIS8WWjVXCMBRGwwTqBMIEuAG4ARuIE6gTKBOgEyAT4AbABjKBMIE/C+h3m6S2pWlJ8BzfOTkpad6770teEzom3bZy/VbrpYTopDjJZ6w2c77X6p9j46SCUXvuYDxHq04BZ2rPHXa3y/DRqlPAmdqZW+hrkMZEq44F52q3oGTdrjEpqmPBudoxKVBVKqsU1THgPbW+klNUt4GHCn6idqEGuMveerUeXFGtNTCvah9qaz+n2gMmKMGBnLrfjPFcMirZ7231XUF19RUJkIhPZqXnT8AM9Osy62v0VPihUqIfjWwx1RkJvbxIpjArhabfbEJ6zQYwysiiT3CW8kJ6Q4BgqMALEnqVNAqQZGSkM/R7nMOBLhZ/B/ZQeg9V/1EsrpLy5dIqP8aAXV6WlQIlZrWq/wzeBK0DM3Y0vA0aAh8FPwTaBC7B2W8+qUOMT4l9dYUUrJK2k4tCOHl7O7zK+Xx69nbWU/iebgKz1+9E+OYPToR1fqOe+SquujeBWdzlYGBPohhjW9b2lGbRa72bwLdyml5d2auvaPyeTOzIw4MxzCkal8h8no3cqT3WJd0ExuFmOjXmlhRIXbnfKZQ7hfJ4HDTM8wVIMi6xJ01y3mV8E5glGlDRGIEKS75DrAtFn/0DA3x/b0ddZbPgGt23JnBW0agpKPzUGCvhoT4iv1HG9Zodtc6HGBTYnoXAXc3UR5SbBwK1d8y+8RUAzxNwU2orOwQeyolF/lLT7mUqQ8BqCj4Bt+j1lR0Cs3Sopt8GFLYNF/2JU7K2k6stePL7fwP/AER2xy+mY1/QAAAAAElFTkSuQmCC"
-      }/*,
-      {
-        title: "6",
-        position: {lat:41.794470000000004, lng:140.75714000000002},
-        iconData: window.location.href.replace(/\/([^\/]+)$/, "") + "/../images/number-6-icon.png"
-      },
-      {
-        position: {lat:41.795010000000005, lng:140.75611},
-        iconData: "cdvfile://"   // The cdvfile:// protocol is acceptable.
-      },
-      {
-        position: {lat:41.79477000000001, lng:140.75484},
-        iconData: "file://"   // The file:// protocol is also acceptable.
-      },
-      {
-        position: {lat:41.79576, lng:140.75475},
-        iconData: "/path/to/image/file"  // Absolute path is also acceptable.
-      }
-      */
-    ]);
+    Geolocation.getCurrentPosition({ enableHighAccuracy: true,  timeout: 100000 }).then((position) => {
+      console.log(position);
+      // let	latLng	=	new	google.maps.LatLng(46.064941,13.230720);
+      const latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      const mapOptions = {
+        center: latLng,
+        zoom: 13
+      };
+      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+      
+    }, (err) => {
 
-    let bounds: ILatLng[] = POINTS.map((data: any, idx: number) => {
-      console.log(data);
-      return data.position;
+      console.log(err);
+      
     });
-
-    this.map = GoogleMaps.create('map_canvas', {
-      camera: {
-        target: bounds
-      }
-    });
-    POINTS.forEach((data: any) => {
-      data.disableAutoPan = true;
-      let marker: Marker = this.map.addMarkerSync(data);
-      marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(this.onMarkerClick);
-      marker.on(GoogleMapsEvent.INFO_CLICK).subscribe(this.onMarkerClick);
-    });
-
+    
   }
 
-  onMarkerClick(params: any) {
-    let marker: Marker = <Marker>params[1];
-    let iconData: any = marker.get('iconData');
-    marker.setIcon(iconData);
+  // Use Capacitor to track our geolocation
+  startTracking() {
+    this.isTracking = true;
+    this.watch = Geolocation.watchPosition({}, (position, err) => {
+      if (position) {
+        this.addNewLocation(
+          position.coords.latitude,
+          position.coords.longitude,
+          position.timestamp
+        );
+      }
+    });
   }
+
+  // Unsubscribe from the geolocation watch using the initial ID
+  stopTracking() {
+    Geolocation.clearWatch({ id: this.watch }).then(() => {
+      this.isTracking = false;
+    });
+  }
+
+  // Save a new location to Firebase and center the map
+  addNewLocation(lat, lng, timestamp) {
+    this.locationsCollection.add({
+      lat,
+      lng,
+      timestamp
+    });
+ 
+    let position = new google.maps.LatLng(lat, lng);
+    this.map.setCenter(position);
+    this.map.setZoom(13);
+  }
+ 
+  // Delete a location from Firebase
+  deleteLocation(pos) {
+    this.locationsCollection.doc(pos.id).delete();
+  }
+
+  // Redraw all markers on the map
+  updateMap(locations) {
+    // Remove all current marker
+    this.markers.map(marker => marker.setMap(null));
+    this.markers = [];
+ 
+    for (let loc of locations) {
+      let latLng = new google.maps.LatLng(loc.lat, loc.lng);
+ 
+      let marker = new google.maps.Marker({
+        map: this.map,
+        animation: google.maps.Animation.DROP,
+        position: latLng
+      });
+      this.markers.push(marker);
+    }
+}
 
 }
