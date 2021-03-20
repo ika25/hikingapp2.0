@@ -1,4 +1,4 @@
- <ion-header>
+<ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -9,72 +9,136 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-button expand="block" share="round" color="success" (click)="calculate()">Calculate</ion-button>
-  <ion-list lines="none"> 
+  <form  #form="ngForm" >
+  <ion-list lines="full"> 
+    
+<ion-row>
+  <ion-col>
   <ion-item>
-    <ion-label position="stacked" class="testclass">Your Weight</ion-label>
-    <ion-input placeholder="Enter your weight"></ion-input>
+    
+    <ion-label position="floating" class="testclass">Your Weight</ion-label>
+    <ion-input type="text" [(ngModel)]="weight" name="weight" id="weight"></ion-input>
   </ion-item> 
+</ion-col>
+
+<ion-col>
   <ion-item>
-    <ion-label position="stacked" class="testclass">Backpack Weight</ion-label>
-    <ion-input placeholder="Enter Backpack Weight"></ion-input>
+    <ion-label position="floating" class="testclass">Backpack Weight</ion-label>
+    <ion-input type="text" [(ngModel)]="bweight" name="bweight" id="bweight"></ion-input>
   </ion-item> 
+  </ion-col> 
+</ion-row> 
   <ion-radio-group value="lbs">
+    <ion-row>
+      <ion-col>
     <ion-list-header>
       <ion-label>Weight Measurement</ion-label>
     </ion-list-header>
+  </ion-col> 
+</ion-row>
+<ion-row>
+  <ion-col>
     <ion-item>
       <ion-label>lbs</ion-label>
       <ion-radio slot="start" color="success" value="lbs"></ion-radio>
     </ion-item> 
+  </ion-col>
+
+  <ion-col>
     <ion-item>
       <ion-label>kgs</ion-label>
       <ion-radio slot="start" color="tertiary" value="kgs"></ion-radio>
     </ion-item> 
+  </ion-col> 
+</ion-row> 
   </ion-radio-group> 
-  <ion-item>
-    <ion-label position="stacked" class="testclass">Hiking Mins</ion-label>
-    <ion-input placeholder="Enter hiking minutes"></ion-input>
+  <ion-row>
+    <ion-col>
+  <ion-item> 
+
+    <ion-label position="floating" class="testclass">Hiking Mins</ion-label>
+    <ion-input type="text" [(ngModel)]="hmins" name="hmins" id="hmins"></ion-input>
+
   </ion-item> 
+</ion-col>
+
+<ion-col>
   <ion-item>
-    <ion-label position="stacked" class="testclass">Distance</ion-label>
-    <ion-input placeholder="Enter distance"></ion-input>
+
+    <ion-label position="floating" class="testclass">Distance</ion-label>
+    <ion-input type="dist" [(ngModel)]="dist" name="dist" id="hmins"></ion-input>
+   
   </ion-item> 
+</ion-col> 
+</ion-row> 
   </ion-list>
   <ion-radio-group value="Miles">
+    <ion-row>
+      <ion-col>
     <ion-list-header>
       <ion-label>Distance Measurement</ion-label>
     </ion-list-header>
+  </ion-col>
+</ion-row>
+<ion-row>
+  <ion-col>
     <ion-item>
       <ion-label>Miles</ion-label>
       <ion-radio slot="start" color="success" value="Miles"></ion-radio>
     </ion-item> 
+  </ion-col>
+<ion-col>
     <ion-item>
       <ion-label>Kilometers</ion-label>
       <ion-radio slot="start" color="tertiary" value="Kilometers"></ion-radio>
     </ion-item> 
+  </ion-col>
+</ion-row>
   </ion-radio-group> 
   <ion-radio-group value="cross">
+    <ion-row>
+      <ion-col>
     <ion-list-header>
       <ion-label>Types of Hike</ion-label>
     </ion-list-header>
+  </ion-col>
+  </ion-row>
+  <ion-row> 
+  <ion-col>
     <ion-item>
       <ion-label>Cross Country</ion-label>
       <ion-radio slot="start" color="success" value="cross"></ion-radio>
     </ion-item> 
+  </ion-col>
+      <ion-col>
     <ion-item>
-      <ion-label>Uphill & Downhill</ion-label>
+      <ion-label>Up/Down hill</ion-label>
       <ion-radio slot="start" color="tertiary" value="updown"></ion-radio>
     </ion-item> 
+  </ion-col> 
+</ion-row> 
+
+<ion-row>
+  <ion-col> 
+   
     <ion-item>
       <ion-label>Uphill only</ion-label>
       <ion-radio slot="start" color="success" value="uponly"></ion-radio>
     </ion-item> 
+  </ion-col>
+
+  <ion-col>
     <ion-item>
       <ion-label>Downhill only</ion-label>
       <ion-radio slot="start" color="tertiary" value="downonly"></ion-radio>
     </ion-item> 
-  </ion-radio-group>  
+      
+   </ion-col> 
+  </ion-row> 
+  </ion-radio-group>
+  <ion-button expand="block" share="round" color="success" (click)="presentAlertConfirm(form)">Calculate</ion-button>
+    
+  </form>
 </ion-content>
 <script>
   const button = document.querySelector('ion-button');
