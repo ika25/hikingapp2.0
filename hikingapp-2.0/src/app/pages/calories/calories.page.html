@@ -1,148 +1,43 @@
 <ion-header>
-  <ion-toolbar class="header-color">
-    <ion-buttons slot="start">
+  <ion-toolbar  class="header-color" >
+    <ion-title  > Home</ion-title>
+    <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title color="light" size="small">HOME</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="setting" ></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 
-<ion-content id='hotspots' [scrollEvents]="true">
-  <ion-list>
-    <ion-list-header color="secondary" lines="full">
-      <h3>Popular Hiking spots</h3>
-    </ion-list-header>
-
-    <ion-item-divider>
-      <ion-label>
-      </ion-label>
-    </ion-item-divider>
-
+<ion-content id='hotspots' [scrollEvents]="true"> 
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Level: Easy</ion-card-subtitle>
+    <ion-card-title>The Causeway Coat</ion-card-title>
+  </ion-card-header> 
+  <ion-card-content>
+    <ion-list>
     <ion-item>
+    <ion-thumbnail slot="start">
       <img src="assets/images/TheCausewayCoast.jpg">
-    </ion-item>
-
-    <ion-item-divider>
-      <ion-label>
-        <ion-text color="warning">
-          <h2>The Causeway Coat </h2>
-        </ion-text>
-        <ion-text color="secondary">
-          <h3> Level: Easy </h3>
-        </ion-text>
-        <ion-text color="danger">
-          <h3> Distance: 4.5 miles</h3>
-        </ion-text>
-
-        <ion-text color="primary">
-          <h3> Starts: Giant's Causeway </h3>
-        </ion-text>
-
-        <ion-text color="success">
-          <h3> Ends: Dunseverick Castle</h3>
-        </ion-text>
-
-      </ion-label>
-    </ion-item-divider>
-
-    <ion-item>
-      <img src="assets/images/GlenariffForest.jpg">
-    </ion-item>
-
-    <ion-item-divider>
-      <ion-label>
-        <ion-text color="warning">
-          <h2>Glenariff Forest Park Scenic Trail, Co Antrim </h2>
-        </ion-text>
-        <ion-text color="secondary">
-          <h3> Level: Moderate </h3>
-        </ion-text>
-        <ion-text color="danger">
-          <h3> Distance: 6 miles</h3>
-        </ion-text>
+    </ion-thumbnail>
+    <ion-label> 
+      <ion-text color="danger">
+        <h3> Distance: 4.5 miles</h3>
+      </ion-text> 
+      <ion-text color="primary">
+        <h3> Starts: Giant's Causeway </h3>
+      </ion-text> 
+      <ion-text color="success">
+        <h3> Ends: Dunseverick Castle</h3>
+      </ion-text> 
+    </ion-label>
+    <ion-button fill="outline" slot="end">View</ion-button>
+  </ion-item>
+</ion-list>
+  </ion-card-content>
+</ion-card>
  
-        <ion-text color="primary">
-          <h3> Starts/Ends: Visitors centre at Glenariff Forest Park </h3>
-        </ion-text>
-
-      </ion-label>
-    </ion-item-divider>
-
-    <ion-item>
-      <img src="assets/images/CuilcaghLegnabrockyTrail.jpg">
-    </ion-item>
-
-    <ion-item-divider>
-      <ion-label>
-        <ion-text color="warning">
-          <h2>Cuilcagh Legnabrocky Trail (‘Stairway to Heaven’), Co Fermanagh </h2>
-        </ion-text>
-        <ion-text color="secondary">
-          <h3> Level: Easy-moderate </h3>
-        </ion-text>
-        <ion-text color="danger">
-          <h3> Distance: 4.5 miles</h3>
-        </ion-text>
-
-        <ion-text color="primary">
-          <h3> Starts/Ends: Cuilcagh Mountain Park car park</h3>
-        </ion-text>
-
-
-      </ion-label>
-    </ion-item-divider>
-
-    <ion-item>
-      <img src="assets/images/carrantuohill.jpg">
-    </ion-item>
-
-    <ion-item-divider>
-      <ion-label>
-        <ion-text color="warning">
-          <h2>The Causeway Coat </h2>
-        </ion-text>
-        <ion-text color="secondary">
-          <h3> Level: Easy </h3>
-        </ion-text>
-        <ion-text color="danger">
-          <h3> Distance: 4.5 miles</h3>
-        </ion-text>
-
-        <ion-text color="primary">
-          <h3> Starts: Giant's Causeway </h3>
-        </ion-text>
-
-        <ion-text color="success">
-          <h3> Ends: Dunseverick Castle</h3>
-        </ion-text>
-
-      </ion-label>
-    </ion-item-divider>
-
-    <ion-item>
-      <img src="assets/images/SlieveGullion.jpg">
-    </ion-item>
-
-    <ion-item-divider>
-      <ion-label>
-        <ion-text color="warning">
-          <h2>Carrauntoohil Hike, Co Kerry </h2>
-        </ion-text>
-        <ion-text color="secondary">
-          <h3> Level: Hard </h3>
-        </ion-text>
-        <ion-text color="danger">
-          <h3> Distance: 7.5 miles</h3>
-        </ion-text>
-
-        <ion-text color="primary">
-          <h3> Starts/Ends: Cronins Yard </h3>
-        </ion-text>
-
-
-      </ion-label>
-    </ion-item-divider>
-
-  </ion-list>
 </ion-content>

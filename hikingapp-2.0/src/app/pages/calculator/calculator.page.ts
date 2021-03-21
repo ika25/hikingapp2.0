@@ -16,25 +16,20 @@ export class CalculatorPage implements OnInit {
 
     this.ionicForm = this.formBuilder.group({
       weight: ['', [Validators.required, Validators.minLength(2)]] ,
-      bweight: ['', [Validators.required, Validators.minLength(2)]] 
+      bweight: ['', [Validators.required, Validators.minLength(2)]] ,
+      wu: ['', [Validators.required, Validators.minLength(2)]] 
     })
     
   } 
   
-  async calculate() { 
-    console.log('(((((( in claculate))))))))');
-    const alert = await this.alertController.create({ 
-      header: 'Alert',
-      subHeader: 'Subtitle',
-      message: 'This is an alert message.',
-      buttons: ['OK']
-    });
 
-  }
  
 
   async presentAlertConfirm(form) {
    
+    console.dir('wieght usnits ='+ form.value['wu']);
+    console.dir('wieght usnits ='+ form.value['cross']);
+    
      var weight= parseInt(form.value['weight']);
      var bweight= parseInt(form.value['bweight']);
 //Multiply your body weight in kilograms (i.e. 60) by 0.035. Eg. 0.035 x 60 = 2.1
