@@ -53,6 +53,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'capture',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/capture/capture.module').then(m => m.CapturePageModule)
+          }
+        ]
+      },
+      {
         path: 'profile',
         children: [
           {
@@ -61,6 +70,11 @@ const routes: Routes = [
           }
         ]
       }
+
+
+
+
+      
     ]
   },
   {
