@@ -60,6 +60,7 @@
     "codelyzer": "^6.0.0",
     "com-sarriaroman-photoviewer": "^1.2.5",
     "cordova-android": "^9.0.0",
+    "cordova-android-support-gradle-release": "^3.0.1",
     "cordova-ios": "^6.1.1",
     "cordova-plugin-camera": "^5.0.1",
     "cordova-plugin-device": "^2.0.2",
@@ -108,15 +109,16 @@
       "cordova-sqlite-storage": {},
       "cordova-plugin-geolocation": {
         "GPS_REQUIRED": "true"
-      }
       },
-      "cordova-plugin-camera": {},
       "cordova-plugin-file": {},
       "cordova-plugin-telerik-imagepicker": {},
-      "cordova-plugin-media": {},
       "cordova-plugin-media-capture": {},
+      "cordova-plugin-media": {},
+      "cordova-plugin-streaming-media": {},
       "com-sarriaroman-photoviewer": {},
-      "cordova-plugin-streaming-media": {}
+      "cordova-android-support-gradle-release": {
+        "ANDROID_SUPPORT_VERSION": "27.+"
+      }
     },
     "platforms": [
       "browser",
