@@ -6,11 +6,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiService {
 
-  API_KEY = '6187b1fdd389465ba42fda07260e5207';
+  API_KEY = 'e40d07f00b094602953cc3bf8537477e';
 
   constructor(private httpClient: HttpClient) { }
 
   getNews(){
-    return this.httpClient.get(`http://newsapi.org/v2/top-headlines?country=ie&apiKey=${this.API_KEY}`);
+    return this.httpClient.get(`http://newsapi.org/v2/top-headlines?country=IE&apiKey=${this.API_KEY}`);
   }
 }

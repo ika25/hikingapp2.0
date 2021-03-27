@@ -48,11 +48,7 @@ const routes: Routes = [
   {
     path: 'covid19',
     loadChildren: () => import('./pages/covid19/covid19.module').then( m => m.Covid19PageModule)
-  },
-  {
-    path: 'calcalculator',
-    loadChildren: () => import('./pages/calcalculator/calcalculator.module').then( m => m.CalcalculatorPageModule)
-  },
+  }, 
   {
     path: 'calculator',
     loadChildren: () => import('./pages/calculator/calculator.module').then( m => m.CalculatorPageModule)

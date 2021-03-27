@@ -1,29 +1,20 @@
 <ion-header>
-  <ion-navbar color="primary">
+  <ion-toolbar class="header-color">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>
-      GPS Tracking
+      Nearby Hiking
     </ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
- 
-<ion-content padding>
- 
-  <button ion-button full icon-left (click)="startTracking()" *ngIf="!isTracking">
-      <ion-icon name="locate"></ion-icon>
-      Start Tracking
-    </button>
-  <button ion-button full color="danger" icon-left (click)="stopTracking()" *ngIf="isTracking">
-      <ion-icon name="hand"></ion-icon>
-      Stop Tracking
-  </button>
- 
-  <div #map id="map"></div>
- 
-  <ion-list>
-    <ion-list-header>Previous Tracks</ion-list-header>
-    <ion-item *ngFor="let route of previousTracks">
-      {{ route.finished | date }}, {{ route.path.length }} Waypoints
-      <button ion-button clear item-end (click)="showHistoryRoute(route.path)">View Route</button>
+
+<ion-content>
+  <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="UpdateSearchResults()" placeholder="Search for a place"  (ionClear)="ClearAutocomplete()"></ion-searchbar>
+  <ion-list [hidden]="autocompleteItems.length == 0">
+    <ion-item *ngFor="let item of autocompleteItems" tappable (click)="SelectSearchResult(item)">
+      {{ item.description }}
     </ion-item>
   </ion-list>
+  <div #map id="map"></div>
 </ion-content>
