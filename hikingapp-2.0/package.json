@@ -40,6 +40,7 @@
     "@types/google-maps": "^3.2.2",
     "cordova-androidx-build": "^1.0.4",
     "cordova-browser": "6.0.0",
+    "cordova-res": "^0.15.2",
     "firebase": "^8.2.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
@@ -110,17 +111,16 @@
         "GPS_REQUIRED": "true"
       },
       "cordova-plugin-file": {},
-      "cordova-plugin-media-capture": {},
       "cordova-plugin-media": {},
       "cordova-plugin-streaming-media": {},
       "com-sarriaroman-photoviewer": {},
       "cordova-android-support-gradle-release": {
         "ANDROID_SUPPORT_VERSION": "27.+"
-      }
+      },
+      "cordova-plugin-media-capture": {}
     },
     "platforms": [
       "browser",
-      "android",
       "ios"
     ]
   }
