@@ -12,6 +12,12 @@
 
 
 <ion-content id='hotspots' [scrollEvents]="true"> 
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addNewHikingPlace()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
 <ion-card>
   <ion-card-header>
     <ion-card-subtitle>Level: Easy</ion-card-subtitle>
@@ -39,5 +45,36 @@
 </ion-list>
   </ion-card-content>
 </ion-card>
+
+
+<ion-content id='hotspots' [scrollEvents]="true"> 
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Level: Easy</ion-card-subtitle>
+      <ion-card-title>The Causeway Coat</ion-card-title>
+    </ion-card-header> 
+    <ion-card-content>
+      <ion-list>
+      <ion-item>
+      <ion-thumbnail slot="start">
+        <img src="assets/images/TheCausewayCoast.jpg">
+      </ion-thumbnail>
+      <ion-label> 
+        <ion-text color="danger">
+          <h3> Distance: 4.5 miles</h3>
+        </ion-text> 
+        <ion-text color="primary">
+          <h3> Starts: Giant's Causeway </h3>
+        </ion-text> 
+        <ion-text color="success">
+          <h3> Ends: Dunseverick Castle</h3>
+        </ion-text> 
+      </ion-label>
+      <ion-button fill="outline" slot="end">View</ion-button>
+    </ion-item>
+  </ion-list>
+    </ion-card-content>
+  </ion-card>
  
 </ion-content>
+
