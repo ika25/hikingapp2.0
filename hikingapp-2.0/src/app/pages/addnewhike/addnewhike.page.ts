@@ -21,8 +21,10 @@ export class AddnewhikePage implements OnInit {
   ngOnInit() {
     this.bookingForm = this.fb.group({
       name: [''],
-      email: [''],
-      mobile: ['']
+      level: [''],
+      distance: [''],
+      starts: [''],
+      ends: ['']
     })
   }
 

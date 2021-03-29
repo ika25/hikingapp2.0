@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar class="ios hydrated">
-    <ion-title class="ios title-ios hydrated">Booking</ion-title>
+    <ion-title class="ios title-ios hydrated">New Hiking Place</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,20 +13,53 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Email</ion-label>
-        <ion-input formControlName="email" type="text" required>
+        <ion-label position="floating">Level</ion-label>
+        <ion-input formControlName="level" type="text" required>
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Mobile</ion-label>
-        <ion-input formControlName="mobile" type="text" required>
+        <ion-label position="floating">Distance</ion-label>
+        <ion-input formControlName="distance" type="text" required>
         </ion-input>
       </ion-item>
 
+      <ion-item>
+        <ion-label position="floating">Starts</ion-label>
+        <ion-input formControlName="starts" type="text" required>
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Ends</ion-label>
+        <ion-input formControlName="ends" type="text" required>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+      <ion-row>
+        <ion-col text-center>
+          <h3>Image Picker</h3>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col text-center>
+          <ion-button (click)="getImages()">Choose Images</ion-button>
+        </ion-col>
+      </ion-row>
       <ion-row>
         <ion-col>
-          <ion-button type="submit" color="primary" shape="full" expand="block">Book Appointment</ion-button>
+          <!-- More Pinterest floating gallery style -->
+          <div class="images">
+            <div class="one-image" *ngFor="let img of imageResponse">
+              <img src="{{img}}" alt="" srcset="">
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="primary" shape="full" expand="block">Add Hiking Spot</ion-button>
         </ion-col>
       </ion-row>
     </form>
