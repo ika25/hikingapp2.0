@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core'; 
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from "@angular/forms";
-import { AppointmentService } from './appointment1';
+import { AddNewHikeService } from './addnewhikeservice';
 
-@Component({
+@Component({ 
   selector: 'app-addnewhike',
   templateUrl: './addnewhike.page.html',
   styleUrls: ['./addnewhike.page.scss'],
 })
 export class AddnewhikePage implements OnInit {
  
-  bookingForm: FormGroup;
+  AddNewForm: FormGroup;
 
   constructor(
-    private aptService: AppointmentService,
+    private addnewService: AddNewHikeService,
     private router: Router,
     public fb: FormBuilder
   ) { }
 
   ngOnInit() {
-    this.bookingForm = this.fb.group({
+    this.AddNewForm = this.fb.group({
       name: [''],
       level: [''],
       distance: [''],
@@ -29,13 +29,14 @@ export class AddnewhikePage implements OnInit {
   }
 
   formSubmit() {
-    if (!this.bookingForm.valid) {
+    if (!this.AddNewForm.valid) {
+      console.log('form not valid');
       return false;
     } else {
-      this.aptService.createBooking(this.bookingForm.value).then(res => {
+      this.addnewService.createNewHikeSpot(this.AddNewForm.value).then(res => {
         console.log(res)
-        this.bookingForm.reset();
-        this.router.navigate(['/home']);
+        this.AddNewForm.reset();
+        this.router.navigate(['/calories']);
       })
         .catch(error => console.log(error));
     }

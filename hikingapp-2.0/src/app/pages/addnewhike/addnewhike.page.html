@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-list lines="full">
-    <form [formGroup]="bookingForm" (ngSubmit)="formSubmit()">
+    <form [formGroup]="AddNewForm" (ngSubmit)="formSubmit()">
       <ion-item>
         <ion-label position="floating">Name</ion-label>
         <ion-input formControlName="name" type="text" required></ion-input>
@@ -35,28 +35,7 @@
         <ion-input formControlName="ends" type="text" required>
         </ion-input>
       </ion-item>
-      <ion-item>
-      <ion-row>
-        <ion-col text-center>
-          <h3>Image Picker</h3>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col text-center>
-          <ion-button (click)="getImages()">Choose Images</ion-button>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <!-- More Pinterest floating gallery style -->
-          <div class="images">
-            <div class="one-image" *ngFor="let img of imageResponse">
-              <img src="{{img}}" alt="" srcset="">
-            </div>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+     
       <ion-row>
         <ion-col>
           <ion-button type="submit" color="primary" shape="full" expand="block">Add Hiking Spot</ion-button>
