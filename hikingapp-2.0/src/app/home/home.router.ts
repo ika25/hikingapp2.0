@@ -62,6 +62,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'addnewhike',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../pages/addnewhike/addnewhike.module').then(m => m.AddnewhikePageModule)
+          }
+        ]
+      },
+      {
         path: 'profile',
         children: [
           {

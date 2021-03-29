@@ -60,6 +60,19 @@ const routes: Routes = [
   {
     path: 'capture',
     loadChildren: () => import('./pages/capture/capture.module').then( m => m.CapturePageModule)
+  },
+  {
+    path: 'addnewhike',
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/addnewhike/addnewhike.module').then(m => m.AddnewhikePageModule)
+      }
+    ]
+  },
+  {
+    path: 'addnewhike',
+    loadChildren: () => import('./pages/addnewhike/addnewhike.module').then( m => m.AddnewhikePageModule)
   }
 
 ];

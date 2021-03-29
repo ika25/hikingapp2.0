@@ -13,7 +13,7 @@ import { CommonService } from 'src/app/services/common.services';
 })
 export class CaloriesPage implements OnInit {
 
-  constructor() { }
+  constructor(private route: Router) { }
 
   ngOnInit() {
   }
@@ -21,5 +21,6 @@ export class CaloriesPage implements OnInit {
 
   async addNewHikingPlace() {
     console.log('inside addNewHikingPlace..');
+    this.route.navigate(['home/addnewhike'])
   }
 }
