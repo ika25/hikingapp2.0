@@ -22,7 +22,7 @@ export class CalculatorPage implements OnInit {
     
   } 
   
-
+ 
  
 
   async presentAlertConfirm(form) {
@@ -46,7 +46,7 @@ var dist= parseInt(form.value['dist']);
 
 
      var calories = result*speed2*1000;
-  
+     
     const alert = await this.alertController.create({ 
       header: 'Calories Info!',
       message: '  <strong> Calories : '+calories+'</strong>!!!',
