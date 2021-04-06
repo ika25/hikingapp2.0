@@ -5,6 +5,7 @@ import { AlertController } from '@ionic/angular';
 import { UserService } from '../../user.service';
 import { AngularFirestore } from '@angular/fire/firestore'
 import { CommonService } from 'src/app/services/common.services';
+import '@ungap/global-this';
 
 @Component({
   selector: 'app-signup',

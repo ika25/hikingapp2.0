@@ -5,7 +5,7 @@ import firebase from 'firebase/app';
 import { UserService } from '../../user.service';
 import { AlertController } from '@ionic/angular';
 import { CommonService } from 'src/app/services/common.services';
-
+import '@ungap/global-this';
 
 @Component({
   selector: 'app-login',

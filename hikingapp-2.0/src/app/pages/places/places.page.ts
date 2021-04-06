@@ -3,7 +3,7 @@ import { Plugins } from '@capacitor/core';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-
+import '@ungap/global-this';
 const { Geolocation } = Plugins;
 
 declare var google;
