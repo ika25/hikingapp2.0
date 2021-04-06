@@ -18,7 +18,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     RouterModule.forChild([{path: '', component: AddnewhikePage}]),
 
     AddnewhikePageRoutingModule
-  ],
+  ], 
   declarations: [AddnewhikePage]
 })
 export class AddnewhikePageModule {}

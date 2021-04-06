@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: AddnewhikePage
+  },
+  {
+    path: 'edit/:key',
+    component: AddnewhikePage
   }
 ];
 
@@ -14,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AddnewhikePageRoutingModule {}
+export class AddnewhikePageRoutingModule { }

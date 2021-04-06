@@ -12,7 +12,7 @@ describe('AddnewhikePage', () => {
       declarations: [ AddnewhikePage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
-
+ 
     fixture = TestBed.createComponent(AddnewhikePage);
     component = fixture.componentInstance;
     fixture.detectChanges();

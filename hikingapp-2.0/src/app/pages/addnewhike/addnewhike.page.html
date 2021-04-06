@@ -35,10 +35,35 @@
         <ion-input formControlName="ends" type="text" required>
         </ion-input>
       </ion-item>
-     
+
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="9">
+              <img style="width: 100%;height: 200px;" *ngIf="selectedImageSrc != '' && selectedImageSrc != undefined"
+                src="{{selectedImageSrc}}">
+              <img style="width: 100%;height: 200px;"
+                *ngIf="(selectedImageSrc == '' || selectedImageSrc == undefined) && (isEditMode && existingImage != '')"
+                src="{{existingImage}}">
+            </ion-col>
+            <ion-col size="3">
+              <input #file type="file" (change)="onFileSelect($event.target.files)" style="display: none;" />
+              <ion-button ion-button icon-start (click)="file.click()" expand="block" class="image-upload">
+                <ion-icon name="cloud-upload-outline"></ion-icon>
+                &nbsp;&nbsp;
+                Upload image
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
       <ion-row>
         <ion-col>
-          <ion-button type="submit" color="primary" shape="full" expand="block">Add Hiking Spot</ion-button>
+          <ion-button type="submit" color="primary" shape="full" expand="block">
+            <ion-label *ngIf="!isEditMode">Add Hiking Spot</ion-label>
+            <ion-label *ngIf="isEditMode">Update Hiking Spot</ion-label>
+          </ion-button>
         </ion-col>
       </ion-row>
     </form>

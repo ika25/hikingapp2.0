@@ -5,4 +5,5 @@ export class NewHikeSpot {
     distance: number;
     starts: string;
     ends: string;
+    image: string;
 }
