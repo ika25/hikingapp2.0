@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { Storage } from '@ionic/storage';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import { UserService } from '../../services/user/user.service';
-import { AngularFirestore } from '@angular/fire/firestore'
-import { CommonService } from 'src/app/services/util/common.services';
-import '@ungap/global-this';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { UserService } from 'src/app/services/user/user.service';
+import { UtilService } from 'src/app/services/util/util.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,59 +13,38 @@ import '@ungap/global-this';
 })
 export class SignupPage implements OnInit {
 
-	email: string = ""
-	password: string = ""
-	username: string = ""
+  registerForm : FormGroup;
 
-  constructor(
-    private route: Router,
-    public afAuth: AngularFireAuth,
-		public afstore: AngularFirestore,
-		public user: UserService,
-		public alertController: AlertController,
-		public router: Router,
-		private comService: CommonService
-		) { }
+  constructor(private storage: Storage, private auth : AuthService, private userService: UserService, private util : UtilService, private fb : FormBuilder
+      ,private router : Router
+    ) { }
 
-  ngOnInit() {
+  createFrom() : void {
+    this.registerForm = this.fb.group({
+      email : ['', Validators.compose([Validators.required, Validators.email])],
+      password : ['', Validators.required],
+      name: ['', Validators.required]
+    }); 
+  }   
+
+  createAccount() : void  {
+    console.log('form', this.registerForm.value);
+    let email : string =this.registerForm.value['email'];
+    let msg : string = `Created account for: <b>${email}</b>`;
+    console.log(msg);
+      this.auth.createAccount(this.registerForm.value).then(data => {
+        console.log('uid account: ', data.user.uid);
+        this.storage.set('uid', JSON.stringify(data.user.uid));
+        this.userService.createUser(this.registerForm.value);
+        this.util.doAlert("Success", msg, "Ok" );
+        this.router.navigateByUrl('/login');
+      },(reason) => {
+        this.util.doAlert("Error", reason, "Ok")
+      });
   }
 
- 
-  async register() {
-		const { email, password, username } = this 
-		try {
-			console.log('username = ' + email);
-			await this.comService.showLoader('');
-			const res = await this.afAuth.createUserWithEmailAndPassword(email , password)
-			console.log(res)	 
-			await this.afstore.doc(`users/${res.user.uid}`).set({
-				email
-			});
-
-			this.user.setUser({
-				username,
-				uid: res.user.uid
-			});
-
-			this.comService.hideLoader();
-			this.comService.showToast('You are registered successfully!');			
-			this.router.navigate(['/login']);
-		} catch(error) {
-			console.dir(error);
-			this.comService.hideLoader()
-			this.comService.showAlert(error.error);
-		}
-  } 
-
-  
-	async presentAlert(title: string, content: string) { 
-		const alert = await this.alertController.create({
-			header: title,
-			message: content,
-			buttons: ['OK']
-		})
-		await alert.present()
-	 
-	}
+  ngOnInit() {
+    this.createFrom();
+  }
 
 }

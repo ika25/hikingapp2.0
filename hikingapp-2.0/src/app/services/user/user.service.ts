@@ -60,5 +60,13 @@ export class UserService {
     getAllUsers(): AngularFireList<User> {
 		return this.db.list(`/users`);
 	  }
+
+	  createUser(user : User) : void {     
+        // console.log('create user in db uid: ', uid);
+        // get the ref of the users with uid and save it in the db
+        let userRef = this.db.object(`users/${this.getUID()}`);
+        userRef.set({email: user.email, name: user.name});
+
+    }
   
 }

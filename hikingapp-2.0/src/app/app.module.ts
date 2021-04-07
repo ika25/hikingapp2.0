@@ -14,7 +14,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { UserService } from './services/user/user.service';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth/auth.service';
 import { FormsModule } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms'
 import { ShareModule } from './share.module';
