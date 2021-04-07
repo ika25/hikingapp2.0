@@ -13,6 +13,7 @@ import {
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 //import	{	GoogleMapComponent	}	from	'../../components/google-map/google-map.component'; 
 
@@ -42,7 +43,7 @@ export class FeedPage {
   watch: string;
   user = null;
   
-  constructor(private afs: AngularFirestore) {
+  constructor(private route: Router,private afs: AngularFirestore) {
     this.anonLogin();
   }
   
@@ -55,6 +56,21 @@ export class FeedPage {
   anonLogin() {
     firebase.auth().onAuthStateChanged(user => { 
       this.user = user;
+
+       
+      console.log('userid is  '+this.user)
+      
+    if (this.user === null) {
+        console.log(user + ' === null . User has to login ');
+        this.route.navigate(['login']);
+        return;
+    }
+    if (this.user == null) {
+      console.log(user + '  uid === null . User has to login ');
+      this.route.navigate(['login']);
+      return;
+   }
+ 
  
       this.locationsCollection = this.afs.collection(
         `locations/${this.user.uid}/track`,

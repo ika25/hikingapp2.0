@@ -26,7 +26,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
 
-    //this.route.navigate(['/home']);
+   // this.route.navigate(['/home']);
   }
 
 
@@ -43,8 +43,8 @@ export class LoginPage implements OnInit {
   async validateLogin() {
     const { username, password } = this
 
-    this.route.navigate(['home/calories'])
-    return;
+    //this.route.navigate(['home/calories'])
+    //return;
 
     try {
       await this.comService.showLoader('')
@@ -57,7 +57,7 @@ export class LoginPage implements OnInit {
           uid: res.user.uid
         })
         this.comService.hideLoader()
-        // this.presentAlert('Success', 'You are registered!')
+         //this.presentAlert('Success', 'You are registered!')
         this.comService.showToast("Loged in now");
         this.route.navigate(['home/calories'])
       } else {
