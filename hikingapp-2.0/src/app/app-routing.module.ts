@@ -74,6 +74,10 @@ const routes: Routes = [
   {
     path: 'addnewhike',
     loadChildren: () => import('./pages/addnewhike/addnewhike.module').then( m => m.AddnewhikePageModule)
+  },
+  {
+    path: 'userslist',
+    loadChildren: () => import('./pages/userslist/userslist.module').then( m => m.UserslistPageModule)
   }
 
 ];

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { CommonService } from 'src/app/services/common.services';
-import { UserService } from 'src/app/user.service';
+import { CommonService } from 'src/app/services/util/common.services';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-profile',

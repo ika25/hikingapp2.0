@@ -13,7 +13,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
-import { UserService } from './user.service';
+import { UserService } from './services/user/user.service';
 import { AuthService } from './auth.service';
 import { FormsModule } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms'
@@ -28,6 +28,7 @@ import { MediaCapture } from '@ionic-native/media-capture/ngx';
 import { Media } from '@ionic-native/media/ngx';
 import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
+import { ServicesModule } from './services/services.module';
 import '@ungap/global-this';
 
 
@@ -44,7 +45,8 @@ import '@ungap/global-this';
     ReactiveFormsModule,//Add if needed 
     FormsModule,
     ShareModule,
-    HttpClientModule    
+    HttpClientModule,
+    ServicesModule 
   ],
   providers: [
     HttpClientModule,

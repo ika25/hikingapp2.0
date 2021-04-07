@@ -1,10 +1,17 @@
+  
 <ion-header>
-  <ion-toolbar class="header-color" >
-    <ion-title class="ios title-ios hydrated">New Hiking Place</ion-title>
+  <ion-toolbar class="header-color">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Add new Hiking Spot
+     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  
   <ion-list lines="full">
     <form [formGroup]="AddNewForm" (ngSubmit)="formSubmit()">
       <ion-item>
@@ -15,6 +22,14 @@
       <ion-item>
         <ion-label position="floating">Level</ion-label>
         <ion-input formControlName="level" type="text" required>
+
+          <ion-select formControlName="level" value="easy">
+            <ion-select-option value="easy">Easy</ion-select-option>
+            <ion-select-option value="moderate">Moderate</ion-select-option>
+            <ion-select-option value="hard">Hard</ion-select-option>
+            <ion-select-option value="risk">Risk</ion-select-option>
+          </ion-select>
+
         </ion-input>
       </ion-item>
 

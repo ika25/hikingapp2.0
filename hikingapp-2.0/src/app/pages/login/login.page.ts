@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
-import { UserService } from '../../user.service';
+import { UserService } from '../../services/user/user.service';
 import { AlertController } from '@ionic/angular';
-import { CommonService } from 'src/app/services/common.services';
+import { CommonService } from 'src/app/services/util/common.services';
 import '@ungap/global-this';
 
 @Component({

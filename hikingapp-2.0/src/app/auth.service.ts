@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Router, CanActivate } from '@angular/router'
-import { UserService } from './user.service'
+import { UserService } from './services/user/user.service'
 
 @Injectable()
 export class AuthService implements CanActivate {
@@ -16,5 +16,9 @@ export class AuthService implements CanActivate {
 
 		this.router.navigate(['/login'])
 		return false
+	}
+
+	getCurrentUserUid(): string {
+		return this.user.getCurrentUserUid();
 	}
 }

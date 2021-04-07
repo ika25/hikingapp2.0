@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 //import { Http } from '@angular/http'
 import { AngularFirestore } from '@angular/fire/firestore';
-import { UserService } from '../../../user.service';
+import { UserService } from '../../../services/user/user.service';
 //import { firestore } from 'firebase/app'; 
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
