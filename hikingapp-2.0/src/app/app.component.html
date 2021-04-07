@@ -4,18 +4,14 @@
       <ion-header>
         <ion-toolbar color="primary">
           <ion-title>
-           User Features
+           Personalized Features
           </ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
         <ion-list>
           <ion-menu-toggle auto-hide="false" menu="first" type="reveal"> 
-            <ion-item routerLink="news" routerDirection="root" routerLinkActive="active-item">
-              <ion-label>
-                News/Events
-              </ion-label>
-            </ion-item>
+            
             <ion-item routerLink="upload" routerDirection="backward" routerLinkActive="active-item">
               <ion-label>
                 Upload 
@@ -33,7 +29,7 @@
             </ion-item>
 			<ion-item routerLink="history" routerDirection="root" routerLinkActive="active-item">
               <ion-label>
-                History
+                Record History
               </ion-label>
             </ion-item>
             <ion-item routerLink="calculator" routerDirection="root" routerLinkActive="active-item">
@@ -41,11 +37,7 @@
                 Calories Calculator
               </ion-label>
             </ion-item>
-            <ion-item routerLink="covid19" routerDirection="root" routerLinkActive="active-item">
-              <ion-label>
-                Covid-19
-              </ion-label>
-            </ion-item>
+          
           </ion-menu-toggle>
         </ion-list>
       </ion-content>
@@ -56,13 +48,14 @@
       <ion-header>
         <ion-toolbar color="primary">
           <ion-title>
-           User Features
+           General Features
           </ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
         <ion-list>
-          <ion-menu-toggle auto-hide="false" menu="setting" type="reveal"> 
+          <ion-menu-toggle auto-hide="false" menu="setting" type="reveal">
+            
             <ion-item routerLink="login" routerDirection="root" routerLinkActive="active-item">
               <ion-label>
                 Login
@@ -73,12 +66,25 @@
                Register
               </ion-label>
             </ion-item>
-                 <ion-item routerLink="signup" routerDirection="root" routerLinkActive="active-item">
+                
+            <ion-item routerLink="news" routerDirection="root" routerLinkActive="active-item">
               <ion-label>
-               Register
+                News/Events
+              </ion-label>
+            </ion-item> 
+
+            <ion-item routerLink="covid19" routerDirection="root" routerLinkActive="active-item">
+              <ion-label>
+                Covid-19
               </ion-label>
             </ion-item>
+
             
+            <ion-item routerLink="" routerDirection="root" routerLinkActive="active-item">
+              <ion-label>
+                Home
+              </ion-label>
+            </ion-item>
           
           </ion-menu-toggle>
         </ion-list>

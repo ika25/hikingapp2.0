@@ -1,7 +1,7 @@
 {
   "appId": "com.hikeireland.app",
   "appName": "hikeireland",
-  "webDir": "src",
+  "webDir": "www",
   "npmClient": "npm",
   "cordova": {
     "preferences": {

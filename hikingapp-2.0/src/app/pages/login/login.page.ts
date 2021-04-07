@@ -65,6 +65,7 @@ export class LoginPage implements OnInit {
       }
     } catch (err) {
       console.dir('error == ', err)
+      this.presentAlert('Invalid Credentials', err.message)
       this.comService.hideLoader()
       this.comService.showToast(err.message)
     }
