@@ -40,10 +40,13 @@
     "@ionic/storage": "^2.3.1",
     "@types/google-maps": "^3.2.2",
     "@ungap/global-this": "^0.4.3",
+    "chart.js": "^2.9.4",
+    "chartjs-plugin-zoom": "^0.7.7",
     "cordova-androidx-build": "^1.0.4",
     "cordova-browser": "6.0.0",
     "cordova-res": "^0.15.2",
     "firebase": "^8.2.1",
+    "ng2-charts": "^2.4.2",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
