@@ -47,4 +47,23 @@ export class CaloriesService {
         // );
         // console.log(data)
     }
+
+    public addToFavorite(userId, hikeId) {
+        let object = {};
+        object[hikeId] = true;
+        return this.db.object('/favorite/' + userId).update(object);
+    }
+
+    public markUnFavorite(userId, hikeId) {
+        console.log("delet")
+        return this.db.object('/favorite/' + userId + '/' + hikeId).remove();
+    }
+
+    public getMyFavorites(userId) {
+        return this.db.list('/favorite/' + `${userId}`).snapshotChanges().pipe(
+            map(changes =>
+                changes.map(c => ({ key: c.payload.key }))
+            )
+        );
+    }
 }

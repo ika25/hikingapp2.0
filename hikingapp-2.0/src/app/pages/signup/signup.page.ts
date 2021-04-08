@@ -13,34 +13,41 @@ import { UtilService } from 'src/app/services/util/util.service';
 })
 export class SignupPage implements OnInit {
 
-  registerForm : FormGroup;
+  registerForm: FormGroup;
 
-  constructor(private storage: Storage, private auth : AuthService, private userService: UserService, private util : UtilService, private fb : FormBuilder
-      ,private router : Router
-    ) { }
+  constructor(private storage: Storage, private auth: AuthService, private userService: UserService, private util: UtilService, private fb: FormBuilder
+    , private router: Router
+  ) { }
 
-  createFrom() : void {
+  createFrom(): void {
     this.registerForm = this.fb.group({
-      email : ['', Validators.compose([Validators.required, Validators.email])],
-      password : ['', Validators.required],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.required],
       name: ['', Validators.required]
-    }); 
-  }   
+    });
+  }
 
-  createAccount() : void  {
+  createAccount(): void {
     console.log('form', this.registerForm.value);
-    let email : string =this.registerForm.value['email'];
-    let msg : string = `Created account for: <b>${email}</b>`;
+    let email: string = this.registerForm.value['email'];
+    let msg: string = `Created account for: <b>${email}</b>`;
     console.log(msg);
-      this.auth.createAccount(this.registerForm.value).then(data => {
-        console.log('uid account: ', data.user.uid);
-        this.storage.set('uid', JSON.stringify(data.user.uid));
-        this.userService.createUser(this.registerForm.value);
-        this.util.doAlert("Success", msg, "Ok" );
-        this.router.navigateByUrl('/login');
-      },(reason) => {
-        this.util.doAlert("Error", reason, "Ok")
-      });
+    this.auth.createAccount(this.registerForm.value).then(data => {
+      console.log('uid account: ', data.user.uid);
+      this.userService.setUser({
+        username: data.user.displayName,
+        uid: data.user.uid
+      })
+      this.storage.set('uid', JSON.stringify(data.user.uid));
+      this.userService.createUser(this.registerForm.value);
+
+
+
+      this.util.doAlert("Success", msg, "Ok");
+      this.router.navigateByUrl('/login');
+    }, (reason) => {
+      this.util.doAlert("Error", reason, "Ok")
+    });
   }
 
   ngOnInit() {

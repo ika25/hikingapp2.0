@@ -3,7 +3,7 @@ import { AlertController, ToastController, LoadingController } from '@ionic/angu
 
 @Injectable()
 
-export class UtilService {
+export class UtilService { 
 
   constructor(private alertController: AlertController, private toastController: ToastController, private loadingController : LoadingController) { }
 

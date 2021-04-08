@@ -18,10 +18,22 @@
     </ion-fab-button>
   </ion-fab>
 
+  <br>
+  <br>
   <ion-card *ngFor="let item of caloriesList">
     <ion-card-header>
-      <ion-card-subtitle>Level: {{item.data.level}}</ion-card-subtitle>
-      <ion-card-title>{{item.data.name}}</ion-card-title>
+      <ion-row>
+        <ion-col size="10">
+          <ion-card-subtitle>Level: {{item.data.level}}</ion-card-subtitle>
+          <ion-card-title>{{item.data.name}}</ion-card-title>
+        </ion-col>
+        <ion-col size="2">
+          <a class="favorite" (click)="markAsFavorite(item.key, item.data.isFav)">
+            <ion-icon *ngIf="item.data.isFav == undefined || item.data.isFav == false" name="heart-outline"></ion-icon>
+            <ion-icon *ngIf="item.data.isFav == true" name="heart"></ion-icon>
+          </a>
+        </ion-col>
+      </ion-row>
     </ion-card-header>
     <ion-card-content>
       <ion-list>

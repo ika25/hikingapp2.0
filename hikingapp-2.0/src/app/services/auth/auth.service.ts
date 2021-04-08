@@ -12,6 +12,7 @@ export class AuthService implements CanActivate {
 	}
 
 	async canActivate(route) {
+		console.log('AuthService service canActivate');
 		if(await this.user.isAuthenticated()) {
 			return true
 		}
@@ -21,17 +22,20 @@ export class AuthService implements CanActivate {
 	}
 
 	getCurrentUserUid(): string {
+		console.log('AuthService service getCurrentUserUid'+this.user.getCurrentUserUid());
 		return this.user.getCurrentUserUid();
 	}
 
 	  // register
 	  public createAccount(user: User)  {
+		console.log('AuthService service createAccount'+user);
 		return this.afAuth.createUserWithEmailAndPassword(user.email, user.password); 
 	   }
 
 	
   // log in 
   public sigin(user: User)    {
+	console.log('AuthService service sigin'+user);
 	return this.afAuth.signInWithEmailAndPassword(user.email, user.password);
   }
 }

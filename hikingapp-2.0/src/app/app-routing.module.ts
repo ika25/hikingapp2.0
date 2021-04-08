@@ -78,6 +78,14 @@ const routes: Routes = [
   {
     path: 'userslist',
     loadChildren: () => import('./pages/userslist/userslist.module').then( m => m.UserslistPageModule)
+  },
+  {
+    path: 'adminchart',
+    loadChildren: () => import('./pages/adminchart/adminchart.module').then( m => m.AdminchartPageModule)
+  },
+  {
+    path: 'favorites',
+    loadChildren: () => import('./pages/favorites/favorites.module').then( m => m.FavoritesPageModule)
   }
 
 ];
