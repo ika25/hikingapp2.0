@@ -1,9 +1,11 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>HikeIreland Users</ion-title>
-    <ion-buttons slot="end">
-      <ion-spinner name="lines" color="light" *ngIf="!users"></ion-spinner>
+  <ion-toolbar class="header-color">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
+    <ion-title>
+      HikeIreland Users List
+     </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -22,9 +24,9 @@
  
   <!-- users.key !== uid: exculeed the logging in  user  -->
   <div *ngFor="let user of users">
-    <ion-item (click)="openChat(user.key)" *ngIf="user.key !== uid">
+    <ion-item >
       <ion-avatar *ngIf="!user.picture" slot="start">
-        <img src="/assets/img/user-default.png">
+        <img src="/assets/images/calories.jpg">
       </ion-avatar>
       <ion-avatar *ngIf="user.picture" slot="start">
         <img src="{{user.picture}}">

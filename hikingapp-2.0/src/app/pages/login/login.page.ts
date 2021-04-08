@@ -36,7 +36,7 @@ export class LoginPage implements OnInit {
     this.auth.sigin(this.loginForm.value).then(data => {
       console.log('uid sigin: ', JSON.stringify(data.user.uid));
       this.storage.set('uid', JSON.stringify(data.user.uid));
-      this.router.navigateByUrl('/tabs');
+      this.router.navigateByUrl('/home/calories');
     },(reason) => {
       this.uitil.doAlert("Error", reason, "Ok");
       this.router.navigateByUrl('/login');

@@ -15,7 +15,7 @@ export class UtilService {
       duration: 3000,
       animated: true
     }).then(toast => toast.present()).catch(err => console.log('Toast Error :', err));
-  }
+  } 
 
   doLoading(message: string) : void {
     this.loadingController.create({
