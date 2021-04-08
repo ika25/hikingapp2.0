@@ -1,29 +1,44 @@
 <ion-header>
-  <ion-toolbar color="red">
-  <ion-title>Login</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Welcome to HikeIreland</ion-title>
   </ion-toolbar>
-  </ion-header>
-  
-  <ion-content padding='true'>
-  <img src="assets/images/logo.jpg" class="smallLogo" />
-  <h1>Sign In</h1>
- 
-  <ion-list>
-     
-    <ion-item>
-		  <ion-label position="floating">Username</ion-label>
-		  <ion-input type="text" [(ngModel)]="username"></ion-input>
-		</ion-item>
-	  
-		<ion-item>
-		  <ion-label position="floating">Password</ion-label>
-		  <ion-input type="password" [(ngModel)]="password"></ion-input>
-    </ion-item>
+</ion-header>
+
+<ion-content fullscreen>
+
+  <form [formGroup]="loginForm">
+
+  <ion-card>
+
+    <ion-card-header>    
+      <ion-card-title color="success">
+        <em>Login</em>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+    <ion-list>
+
+      <ion-item>
+        <ion-label position="floating"> Email:<ion-text color="danger"> *</ion-text></ion-label>
+        <ion-input formControlName="email" clear-input="true" type="email" placeholder="Email..."></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating"> Password:<ion-text color="danger"> *</ion-text></ion-label>
+        <ion-input formControlName="password" clear-input="true" type="password" placeholder="Password..."></ion-input>
+      </ion-item>
+
+      <ion-button (click)="sigin()" [disabled]="!loginForm.valid" shape="round" color="primary"><ion-icon slot="end" name="log-in"></ion-icon>Sign In</ion-button>
+      <ion-button  routerLink="/signup" fill="clear" color="primary">Create an Account ?</ion-button> 
+
+      </ion-list>
+       
+    </ion-card-content>
+
+    </ion-card>
     
-  <ion-item lines='none'>
-  <a routerLink='/signup'>Create Account</a>
-  </ion-item>
-  </ion-list>
-  <ion-button expand="block" share="round" color="success" (click)="validateLogin()">Login</ion-button>
- 
-  </ion-content>
+  </form>
+
+</ion-content>

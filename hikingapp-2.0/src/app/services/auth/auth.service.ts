@@ -30,4 +30,8 @@ export class AuthService implements CanActivate {
 	   }
 
 	
+  // log in 
+  public sigin(user: User)    {
+	return this.afAuth.signInWithEmailAndPassword(user.email, user.password);
+  }
 }
