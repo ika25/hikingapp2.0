@@ -25,6 +25,8 @@ export class UtilService {
     }).then(loading => loading.present()).catch(err => console.log('Loading Error', err));
   }
 
+
+  // notification for user by alerting with alert controller provided 
   doAlert(title :string, message: string, buttonText: string) : void {
     this.alertController.create({
       header: title,

@@ -23,22 +23,27 @@ export class UserService {
 
 	}
 
+	// set the user 
 	setUser(user: user) {
 		console.log('user service setUser='+user);
 		this.user = user
 		this.storage.set('u_data', user);
 	}
 
+	// get the user name of the current user
 	getUsername(): string {
 		console.log('user service getUsername=');
 		return this.user.username
 	}
 
+	// fetch the current user id
 	getCurrentUserUid(): string {
 		console.log('user service getCurrentUserUid='+this.user.uid);
 		return this.user.uid;
 	}
  
+
+	// checks if the user is authenticated
 	async isAuthenticated() {
 		console.log('user service isAuthenticated user='+this.user);
 		if(this.user) return true
@@ -62,12 +67,13 @@ export class UserService {
 		return this.user.uid
 	}
 
-	
+	// fetch all the users from te fireabase
     getAllUsers(): AngularFireList<User> {
 		console.log('user service getAllUsers');
 		return this.db.list(`/users`);
 	  }
 
+	  // create the user by integrated with firestore
 	  createUser(user : User) : void {     
         // console.log('create user in db uid: ', uid);
 		// get the ref of the users with uid and save it in the db

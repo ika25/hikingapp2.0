@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
+// calculator functionality to display the calculate calories function
 @Component({
   selector: 'app-calculator',
   templateUrl: './calculator.page.html',
@@ -23,7 +24,7 @@ export class CalculatorPage implements OnInit {
   } 
   
  
- 
+ // This is to simulate caloires burned calculation . The algorithm may not be accurate
 
   async presentAlertConfirm(form) {
    

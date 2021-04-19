@@ -14,6 +14,8 @@ declare var google;
 	styleUrls: ['./places.page.scss'],
 })
 
+// Places is used for the applicaiton to store all the hiking places
+// All the hiking places are filterd based on the user location to display the nearby hiking spots.
 export class PlacesPage {
 
 	// Map related
@@ -40,6 +42,7 @@ export class PlacesPage {
 	}
 
 	// Initialize a blank map
+	//Map that shall be displayed to the user
 	loadMap() {
 		Geolocation.getCurrentPosition({ enableHighAccuracy: true,  timeout: 100000 }).then((position) => {
 		  //console.log(position);
@@ -76,7 +79,7 @@ export class PlacesPage {
 		});
 		
 	}
-
+// Marker to highlight the location on the map 
 	// Redraw all markers on the map
 	createMarker(place) {
 		const marker = new google.maps.Marker({

@@ -11,7 +11,7 @@ export class StartComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {}
-
+//navigate to login page
   naviagateToLoginPage(){
     this.router.navigate(['login']);
 

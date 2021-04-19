@@ -5,7 +5,8 @@ import { AddNewHikeService } from './addnewhikeservice';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { finalize, map, takeUntil } from 'rxjs/operators';
 import { ToastController } from '@ionic/angular';
-
+// add new hike functionality, when user clicks plus button from home screen 
+//add new hike feature is invoked.
 @Component({
   selector: 'app-addnewhike',
   templateUrl: './addnewhike.page.html',
@@ -72,6 +73,8 @@ export class AddnewhikePage implements OnInit {
     });
   }
 
+  // User can select the file and  upload the image of new hike to add
+  //Below function is used to upload.
   async onFileSelect(event: FileList) {
     const file = event.item(0)
     if (file.type.split('/')[0] !== 'image') {
@@ -92,6 +95,8 @@ export class AddnewhikePage implements OnInit {
     reader.readAsDataURL(file);
   }
 
+  // This is the function used when the user selects the file and submit.
+  //the image/file get stored in firestore.
   public async uploadAndSave(file) {
     let url = '';
     if (this.selectedImage != null && this.selectedImage != undefined) {

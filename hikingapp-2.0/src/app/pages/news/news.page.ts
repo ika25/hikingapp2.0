@@ -7,7 +7,8 @@ import { ApiService } from '../../services/news/api.service';
   styleUrls: ['news.page.scss'],
 })
 export class NewsPage {
-  
+  //Displays the news information while invoking 
+  //a service hase been integrated with newsapi to fetch the results
   articles;
 
   constructor(private apiService: ApiService){}

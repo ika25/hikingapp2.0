@@ -17,6 +17,7 @@ export class CommonService {
     this.toastCtrl.create({ message: message, duration: 3000 }).then(res => res.present());
   }
 
+  // display the alert message for the user across the applicaiton
   showAlert(message) {
     this.alertCtrl.create({
       message: message,
@@ -24,6 +25,7 @@ export class CommonService {
     }).then(res => res.present());
   }
 
+  // This can be used to display if the page loading is consuming time
   async showLoader(message) {
     const check = await this.loadCtrl.getTop();
     if (check) {
@@ -34,6 +36,7 @@ export class CommonService {
     });
   }
 
+  // This can be used to hide the loader 
   async hideLoader() {
     const check = await this.loadCtrl.getTop();
     if (check) {

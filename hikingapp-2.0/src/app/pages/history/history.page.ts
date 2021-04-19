@@ -23,6 +23,8 @@ declare var google;
   templateUrl: './history.page.html',
   styleUrls: ['./history.page.scss'],
 })
+
+// This page is to display the history of the trips
 export class HistoryPage{
 
   user = null;

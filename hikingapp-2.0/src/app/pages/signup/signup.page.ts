@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { UtilService } from 'src/app/services/util/util.service';
 
+//Signup page to dispaly the details for the user to register with the applicaiton
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.page.html',
@@ -19,6 +20,8 @@ export class SignupPage implements OnInit {
     , private router: Router
   ) { }
 
+
+  //function to create form with the components required
   createFrom(): void {
     this.registerForm = this.fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -27,6 +30,7 @@ export class SignupPage implements OnInit {
     });
   }
 
+  // create the account of the customer
   createAccount(): void {
     console.log('form', this.registerForm.value);
     let email: string = this.registerForm.value['email'];

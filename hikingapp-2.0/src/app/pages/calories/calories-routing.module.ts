@@ -8,14 +8,7 @@ const routes: Routes = [
     path: '',
     component: CaloriesPage,
     children: [
-      {
-        path: 'news',
-        loadChildren: () => import('../../pages/messages/messages.module').then( m => m.MessagesPageModule)
-      },
-      {
-        path: 'notifications',
-        loadChildren: () => import('../../pages/notifications/notifications.module').then( m => m.NotificationsPageModule)
-      },
+   
       {
         path: 'upload',
         loadChildren: () => import('../../pages/calories/upload/upload.module').then( m => m.UploadPageModule)

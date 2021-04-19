@@ -41,6 +41,8 @@ export class UserService {
 		return this.afAuth.currentUser.updateEmail(newemail + '@codedamn.com')
 	}
 */
+
+// checks if the user is authenticated
 	async isAuthenticated() {
 		if(this.user) return true
 

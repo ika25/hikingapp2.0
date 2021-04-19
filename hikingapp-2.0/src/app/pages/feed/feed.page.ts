@@ -16,7 +16,9 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 //import	{	GoogleMapComponent	}	from	'../../components/google-map/google-map.component'; 
-
+//This is used to facilitate the user to track the journey. 
+//user is provided with button to start and stop the journey. 
+//Latitute and Longitudes are captured and saved into firestore
 const { Geolocation } = Plugins;
 
 declare var google;

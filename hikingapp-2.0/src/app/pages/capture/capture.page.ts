@@ -12,7 +12,9 @@ import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
  
 const MEDIA_FOLDER_NAME = 'my_media';
- 
+ // Media function to record and capture images
+ // This contains feature to take picture capture, record video, record audio functions.
+ //The media content can also be stored in the firesbase.
 @Component({
   selector: 'app-capture',
   templateUrl: 'capture.page.html',
@@ -57,7 +59,8 @@ export class CapturePage implements OnInit {
 
 
 
-
+// This is used to select the option among 
+//1. Capture Image 2. Record Video 3. Record Audio 4. Load multiple files
   async selectMedia() {
     const actionSheet = await this.actionSheetController.create({
       header: 'What would you like to add?',
@@ -95,6 +98,7 @@ export class CapturePage implements OnInit {
     await actionSheet.present();
   }
  
+  // Select images from multiple pictures.
   pickImages() {
     this.imagePicker.getPictures({}).then(
       results => {
@@ -111,6 +115,7 @@ export class CapturePage implements OnInit {
     // });
   }
  
+  // Capture images  from camera
   captureImage() {
     this.mediaCapture.captureImage().then(
       (data: MediaFile[]) => {
@@ -122,6 +127,8 @@ export class CapturePage implements OnInit {
     );
   }
  
+
+  //functionality to record audio feature
   recordAudio() {
     this.mediaCapture.captureAudio().then(
       (data: MediaFile[]) => {
@@ -133,6 +140,8 @@ export class CapturePage implements OnInit {
     );
   }
  
+
+  // functionality to record video
   recordVideo() {
     this.mediaCapture.captureVideo().then(
       (data: MediaFile[]) => {
@@ -145,6 +154,7 @@ export class CapturePage implements OnInit {
   }
 
 
+  // copy files tol local directory
   copyFileToLocalDir(fullPath) {
     let myPath = fullPath;
     // Make sure we copy from the right location
@@ -169,7 +179,7 @@ export class CapturePage implements OnInit {
       }
     );
   }
- 
+ // open files
   openFile(f: FileEntry) {
     if (f.name.indexOf('.wav') > -1) {
       // We need to remove file:/// from the path for the audio plugin to work
@@ -185,6 +195,7 @@ export class CapturePage implements OnInit {
     }
   }
  
+  //delete selected file
   deleteFile(f: FileEntry) {
     const path = f.nativeURL.substr(0, f.nativeURL.lastIndexOf('/') + 1);
     this.file.removeFile(path, f.name).then(() => {

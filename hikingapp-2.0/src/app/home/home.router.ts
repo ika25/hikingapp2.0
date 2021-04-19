@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home.page';
 
+//This is the home page and contains all routings defined during navigation of the application
 const routes: Routes = [
   {
     path: 'home',
@@ -24,16 +25,7 @@ const routes: Routes = [
             loadChildren: () => import('../pages/places/places.module').then(m => m.PlacesPageModule)
           }
         ]
-      },
-      {
-        path: 'record',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('../pages/record/record.module').then(m => m.RecordPageModule)
-          }
-        ]
-      },
+      }, 
       {
         path: 'calories',
         children: [

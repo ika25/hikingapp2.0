@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/user/user.service';
 import { NewHikeSpot } from '../addnewhike/NewHikeSpot';
 import { CaloriesService } from '../calories/calories.service';
 
+//This is used to add the favorites icon to the hiking list.
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.page.html',

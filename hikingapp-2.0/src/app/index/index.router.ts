@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {IndexPage} from './index.page'; 
 
+//Routing page , which configures user navigation routings
+//login and signup routings are configured
 const routes: Routes = [
   {
     path: '',

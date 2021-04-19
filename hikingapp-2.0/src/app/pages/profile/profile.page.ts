@@ -8,6 +8,10 @@ import { UserService } from 'src/app/services/user/user.service';
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
+
+
+// profile page to display the profiles fo the customer.
+// customer can update the profile page.
 export class ProfilePage implements OnInit {
 
   current_pass; new_pass; confirm_pass

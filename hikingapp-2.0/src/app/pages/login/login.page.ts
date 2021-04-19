@@ -11,6 +11,10 @@ import { UserService } from 'src/app/services/user/user.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
+
+
+// This page is to display the Login page  for the user
+// to enter the login details that are need to login to the application
 export class LoginPage implements OnInit {
 
   loginForm : FormGroup; 

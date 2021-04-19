@@ -13,7 +13,7 @@ export class CovidService {
   getAll() {
     return this.http.get(`${this.apiUrl}all`, );
   }
-
+// fetch list of countryies
   getCountries() {
     return this.http.get(`${this.apiUrl}countries`);
   }

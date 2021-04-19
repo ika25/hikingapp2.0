@@ -9,6 +9,9 @@ import { UserService } from 'src/app/services/user/user.service';
   templateUrl: './settings.page.html',
   styleUrls: ['./settings.page.scss'],
 })
+
+// Setting page to configure applicaiton settings
+//This has to be implemented as this is impelmented partially
 export class SettingsPage implements OnInit {
 
   constructor(
@@ -21,6 +24,8 @@ export class SettingsPage implements OnInit {
   ngOnInit() {
   }
 
+
+  // On click of the the logout button user session is closed.
   async logout() {
     await this.comService.showLoader('')
     await this.afAuth.signOut();

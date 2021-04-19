@@ -48,17 +48,21 @@ export class CaloriesService {
         // console.log(data)
     }
 
+
+    // This is the function used to add the hiking place as favorites
     public addToFavorite(userId, hikeId) {
         let object = {};
         object[hikeId] = true;
         return this.db.object('/favorite/' + userId).update(object);
     }
 
+    //This is used when user unchecks the favorite
     public markUnFavorite(userId, hikeId) {
         console.log("delet")
         return this.db.object('/favorite/' + userId + '/' + hikeId).remove();
     }
 
+    // This function is used to get list of favorites from firebase
     public getMyFavorites(userId) {
         return this.db.list('/favorite/' + `${userId}`).snapshotChanges().pipe(
             map(changes =>

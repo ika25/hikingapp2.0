@@ -7,3 +7,4 @@ export class NewHikeSpot {
     ends: string;
     image: string;
 }
+//object defining the NEWHIKESPOT stored in the database

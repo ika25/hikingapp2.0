@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CovidService } from '../../services/util/covid.service';
-
+// The component contains functions to invoke the service covidservice to fetch the covid details.
 @Component({
   selector: 'app-covid19',
   templateUrl: 'covid19.page.html',
