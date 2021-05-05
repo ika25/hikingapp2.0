@@ -27,8 +27,7 @@
     "@ionic-native/camera": "^5.30.0",
     "@ionic-native/core": "^5.22.0-beta-1",
     "@ionic-native/file": "^5.30.0",
-    "@ionic-native/geolocation": "^5.30.0",
-    "@ionic-native/google-maps": "^5.27.0-beta-20200630",
+    "@ionic-native/geolocation": "^5.32.1",
     "@ionic-native/image-picker": "^5.30.0",
     "@ionic-native/media": "^5.30.0",
     "@ionic-native/media-capture": "^5.30.0",
@@ -42,12 +41,15 @@
     "@ungap/global-this": "^0.4.3",
     "chart.js": "^2.9.4",
     "chartjs-plugin-zoom": "^0.7.7",
+    "cordova-android": "^8.1.0",
     "cordova-androidx-build": "^1.0.4",
     "cordova-browser": "6.0.0",
     "cordova-res": "^0.15.2",
     "firebase": "^8.2.1",
     "ng2-charts": "^2.4.2",
+    "ngx-google-places-autocomplete": "^2.0.5",
     "rxjs": "~6.5.5",
+    "sweetalert2": "^9.8.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },
@@ -60,19 +62,19 @@
     "@angular/language-service": "~10.0.0",
     "@capacitor/cli": "^2.4.4",
     "@ionic/angular-toolkit": "^3.0.0",
+    "@types/googlemaps": "^3.39.2",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "com-sarriaroman-photoviewer": "^1.2.5",
-    "cordova-android": "^9.0.0",
+    "cordova-android": "8.1.0",
     "cordova-android-support-gradle-release": "^3.0.1",
     "cordova-ios": "^6.1.1",
     "cordova-plugin-camera": "^5.0.1",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-geolocation": "^4.0.2",
-    "cordova-plugin-googlemaps": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps.git#multiple_maps",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^4.2.1",
     "cordova-plugin-media": "^5.0.3",
@@ -110,7 +112,6 @@
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-googlemaps": {},
       "cordova-sqlite-storage": {},
       "cordova-plugin-file": {},
       "cordova-plugin-media": {},
@@ -120,7 +121,9 @@
         "ANDROID_SUPPORT_VERSION": "27.+"
       },
       "cordova-plugin-media-capture": {},
-      "cordova-plugin-geolocation": {}
+      "cordova-plugin-geolocation": {
+        "GPS_REQUIRED": "true"
+      }
     },
     "platforms": [
       "browser",
