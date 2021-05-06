@@ -27,9 +27,12 @@ export class AppComponent {
   async initializeApp() {
     this.platform.ready().then(async () => {
       var user = await this.storage.get('u_data');
+      console.log('-----start-----');
+      console.log(user);
       if (user) {
         this.userService.user = user;
         this.navCtrl.navigateRoot('home/calories');
+
       } else {
         this.navCtrl.navigateRoot('login')
       }

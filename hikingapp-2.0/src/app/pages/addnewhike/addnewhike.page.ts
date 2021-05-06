@@ -5,6 +5,8 @@ import { AddNewHikeService } from './addnewhikeservice';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { finalize, map, takeUntil } from 'rxjs/operators';
 import { ToastController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
+
 // add new hike functionality, when user clicks plus button from home screen 
 //add new hike feature is invoked.
 @Component({
@@ -27,6 +29,7 @@ export class AddnewhikePage implements OnInit {
     private addnewService: AddNewHikeService,
     private router: Router,
     public fb: FormBuilder,
+    private navCtrl: NavController,
     private route: ActivatedRoute,
     public toastController: ToastController
   ) { }
@@ -42,6 +45,10 @@ export class AddnewhikePage implements OnInit {
         this.isEditMode = false;
       }
     });
+  }
+
+  go_back(){
+    this.navCtrl.back();
   }
 
   ngOnInit() {

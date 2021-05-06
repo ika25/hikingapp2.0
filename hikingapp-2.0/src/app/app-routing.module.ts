@@ -8,10 +8,18 @@ const routes: Routes = [
   // },
   // ALL THE ROUTING configurations are configured in the applicaiton
   //based on the path the corresonding comonent is invoked
+  
+  // {
+  //   path: '', 
+  //  // loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+  //    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  // },   
+  
+//  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
-    path: '', 
+    path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
-  },   
+  }, 
   {
     path: 'places',
     loadChildren: () => import('./pages/places/places.module').then( m => m.PlacesPageModule)

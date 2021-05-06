@@ -5,7 +5,7 @@ import { HomePage } from './home.page';
 //This is the home page and contains all routings defined during navigation of the application
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: HomePage,
     children: [
       {
