@@ -29,6 +29,12 @@ export class UserService {
 		this.user = user
 		this.storage.set('u_data', user);
 	}
+	
+	removeUser(){
+		this.user=null;
+		this.storage.remove('u_data');
+		this.storage.remove('uid'); 
+	}
 
 	// get the user name of the current user
 	getUsername(): string {

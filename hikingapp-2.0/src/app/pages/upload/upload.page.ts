@@ -4,6 +4,7 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
+import { NavController } from '@ionic/angular';
 
 export interface MyData {
   name: string;
@@ -42,7 +43,7 @@ export class UploadPage {
   isUploaded: boolean;
 
   private imageCollection: AngularFirestoreCollection<MyData>;
-  constructor(private storage: AngularFireStorage, private database: AngularFirestore) {
+  constructor(private storage: AngularFireStorage, private database: AngularFirestore,private navCtrl: NavController) {
     this.isUploading = false;
     this.isUploaded = false;
     //Set collection where our documents/ images info will save
@@ -50,6 +51,10 @@ export class UploadPage {
     this.images = this.imageCollection.valueChanges();
   }
 
+
+  go_back(){
+    this.navCtrl.back();
+  }
 
   uploadFile(event: FileList) {
 

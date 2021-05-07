@@ -46,7 +46,9 @@ export class LoginPage implements OnInit {
 				username: data.user.displayName,
 				uid: data.user.uid
 			})
+    //  this.router.navigateByUrl('/home/calories');
       this.router.navigateByUrl('/home/calories');
+
     },(reason) => {
       this.uitil.doAlert("Error", reason, "Ok");
       this.router.navigateByUrl('/login');

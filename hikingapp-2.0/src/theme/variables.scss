@@ -229,4 +229,16 @@
 
     --ion-card-background: #1e1e1e;
   }
+
+  .modal-css-height-100 .modal-wrapper {
+    height: 100%;
+    width: 100%;
+    // min-height: 460px;
+    // max-height: 460px;
+    position: absolute;
+    display: block;
+    // border-radius: 20px;
+    bottom: 0px;
+  }
+  
 }

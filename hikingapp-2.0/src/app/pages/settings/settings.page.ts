@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { NavController } from '@ionic/angular';
 import { CommonService } from 'src/app/services/util/common.services';
 import { UserService } from 'src/app/services/user/user.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-settings',
@@ -16,9 +17,12 @@ export class SettingsPage implements OnInit {
 
   constructor(
     public afAuth: AngularFireAuth,
-    public user: UserService,
+    public userService: UserService,
     private comService: CommonService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private storage: Storage,
+    
+
   ) { }
 
   ngOnInit() {
@@ -27,10 +31,12 @@ export class SettingsPage implements OnInit {
 
   // On click of the the logout button user session is closed.
   async logout() {
-    await this.comService.showLoader('')
+   // this.comService.showLoader('')
     await this.afAuth.signOut();
-    this.user.user = null;
-    this.comService.hideLoader();
+    this.userService.user = null;
+    this.userService.removeUser();  
+  
+    //this.comService.hideLoader();
     this.navCtrl.navigateRoot('login');
   }
 

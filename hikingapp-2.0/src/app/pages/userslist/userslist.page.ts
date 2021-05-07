@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { User } from 'src/app/models/User';
 import { Router } from '@angular/router';
 import { UtilService } from 'src/app/services/util/util.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-userslist',
@@ -14,7 +15,7 @@ export class UserslistPage implements OnInit {
   users: User[];
   uid: string;
 
-  constructor(private userService: UserService, private router: Router, private util: UtilService) {
+  constructor(private userService: UserService, private router: Router, private util: UtilService,private navCtrl: NavController) {
     this.util.doLoading('Please Wait...');
     this.userService.getAllUsers().snapshotChanges().pipe(
       map(changes => changes.map(c => ({
@@ -24,6 +25,9 @@ export class UserslistPage implements OnInit {
     
   }
 
+  go_back(){
+    this.navCtrl.back();
+  }
 
   ngOnInit() {
 
