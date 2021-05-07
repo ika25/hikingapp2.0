@@ -1,6 +1,8 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { Plugins } from '@capacitor/core';
-import { AlertController,	LoadingController, } from '@ionic/angular';
+import { Component, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation/ngx';
+import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
+import { Address } from 'ngx-google-places-autocomplete/objects/address';
+import { UtilService } from '../../services/util.service';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -15,11 +17,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-//import	{	GoogleMapComponent	}	from	'../../components/google-map/google-map.component'; 
-//This is used to facilitate the user to track the journey. 
-//user is provided with button to start and stop the journey. 
-//Latitute and Longitudes are captured and saved into firestore
-const { Geolocation } = Plugins;
 
 declare var google;
 
@@ -30,27 +27,30 @@ declare var google;
 })
 export class FeedPage {
 
+  saveflag=false;
+	@ViewChild('map', { static: true }) mapEle: ElementRef;
+	@ViewChild('placesRef', { static: false }) placesRef: GooglePlaceDirective;
+
+  map: any;
+  marker: any;
+  lat: any;
+  lng: any;
+  address: any;
+
+
   // Firebase Data
   locations: Observable<any>;
   locationsCollection: AngularFirestoreCollection<any>;
-
-  // Map related
-  @ViewChild('map') mapElement: ElementRef;
-  map: any;
-  markers = [];
-  loc : any;
-  
-  // Misc
-  isTracking = false;
-  watch: string;
   user = null;
   
-  constructor(private route: Router,private afs: AngularFirestore) {
+  constructor(private route: Router,private afs: AngularFirestore,    public util: UtilService,  private ngZone: NgZone,  public geolocation: Geolocation  ) {
     this.anonLogin();
+    this.lat= 53.34507319942192;
+		this.lng=-6.254235003125004;
   }
   
   ionViewWillEnter() {
-    this.loadMap();
+    this.getUserPosition();
   }
 
 
@@ -79,100 +79,205 @@ export class FeedPage {
         ref => ref.orderBy('timestamp')
       );
  
-      // Make sure we also get the Firebase item ID!
-      this.locations = this.locationsCollection.snapshotChanges().pipe(
-        map(actions =>
-          actions.map(a => {
-            const data = a.payload.doc.data();
-            const id = a.payload.doc.id;
-            return { id, ...data };
-          })
-        )
-      );
+      // // Make sure we also get the Firebase item ID!
+      // this.locations = this.locationsCollection.snapshotChanges().pipe(
+      //   map(actions =>
+      //     actions.map(a => {
+      //       const data = a.payload.doc.data();
+      //       const id = a.payload.doc.id;
+      //       return { id, ...data };
+      //     })
+      //   )
+      // );
  
-      // Update Map marker on every change
-      this.locations.subscribe(locations => {
-        this.updateMap(locations);
-        this.loc=locations;
-      });
+      // // Update Map marker on every change
+      // this.locations.subscribe(locations => {
+      //   this.updateMap(locations);
+      //   this.loc=locations;
+      // });
     });
   }
 
-  // Initialize a blank map
-  loadMap() {
-    Geolocation.getCurrentPosition({ enableHighAccuracy: true,  timeout: 100000 }).then((position) => {
-      console.log(position);
-      // let	latLng	=	new	google.maps.LatLng(46.064941,13.230720);
-      const latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      const mapOptions = {
-        center: latLng,
-        zoom: 13
-      };
-      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-      
-    }, (err) => {
+  getUserPosition(){
+    var options = { enableHighAccuracy: true  ,timeout: 15000,  maximumAge: 3600};
 
-      console.log(err);
-      
+    this.geolocation.getCurrentPosition(options).then((resp) => {
+      if (resp) {
+        console.log('----get position-------', resp);
+        this.loadmap(resp.coords.latitude, resp.coords.longitude, this.mapEle);
+        this.getAddress(resp.coords.latitude, resp.coords.longitude);
+      }else{
+        console.log('----dont get position-------', resp);
+        this.setDefaultpoisition();
+
+      }
+    }).catch((error) => {
+
+      console.log('------get position error----', error);
+      this.setDefaultpoisition();
+
     });
+  }
+
+  public setDefaultpoisition(){
+    this.loadmap(this.lat,this.lng, this.mapEle);
+    this.getAddress(this.lat,this.lng);
+  }
+
+  public handleAddressChange(address: Address) {
+    this.loadmap(address.geometry.location.lat(),address.geometry.location.lng(), this.mapEle);
+    this.getAddress(address.geometry.location.lat(),address.geometry.location.lng());
+  }
+
+  loadmap(lat, lng, mapElement) {
+    const location = new google.maps.LatLng(lat, lng);
+    const style = [
+      {
+        featureType: 'poi',
+        elementType: 'all',
+     
+      }
+    ];
+
+    const mapOptions = {
+      zoom: 10,
+      streetViewControl: false,
+      zoomControl: true,
+      overviewMapControl: false,
+      center: location,
+      mapTypeControl: false,        
+    };
     
+    this.map = new google.maps.Map(mapElement.nativeElement, mapOptions);
+    var mapType = new google.maps.StyledMapType(style, { name: 'Grayscale' });
+    this.map.mapTypes.set('Pet', mapType);
+    this.map.setMapTypeId('Pet');
+    this.addMarker(location);
+
   }
 
-  // Use Capacitor to track our geolocation
-  startTracking() {
-    this.isTracking = true;
-    this.watch = Geolocation.watchPosition({}, (position, err) => {
-      if (position) {
-        this.addNewLocation(
-          position.coords.latitude,
-          position.coords.longitude,
-          position.timestamp
-        );
+  getAddress(lat, lng) {
+    const geocoder = new google.maps.Geocoder();
+    const location = new google.maps.LatLng(lat, lng);
+
+    this.address = "";
+    this.saveflag=true;
+
+    geocoder.geocode({ 'location': location }, (results, status) => {
+      console.log(results);
+      if (status=='OK'){
+        this.ngZone.run(() => {
+          this.address = results[0].formatted_address;
+          this.lat = lat;
+          this.lng = lng;
+        });
+      }else{
+        this.ngZone.run(() => {
+          this.lat = lat;
+          this.lng = lng;       
+        });
       }
     });
   }
 
-  // Unsubscribe from the geolocation watch using the initial ID
-  stopTracking() {
-    Geolocation.clearWatch({ id: this.watch }).then(() => {
-      this.isTracking = false;
+
+
+  addMarker(location) {
+ 
+    this.marker = new google.maps.Marker({
+      position: location,
+      map: this.map,
+      draggable: true,
+      animation: google.maps.Animation.DROP
+    })
+
+
+    let thisObj = this;
+    this.map.addListener('click', function (e) {
+      thisObj.marker.setPosition(e.latLng);
+      thisObj.getAddress(e.latLng.lat(),e.latLng.lng());
     });
+
+    this.marker.addListener('dragend', function (e) {
+      console.log("----dragend pin ----",e.latLng.lat(),e.latLng.lng());
+      thisObj.marker.setPosition(e.latLng); 
+      thisObj.getAddress(e.latLng.lat(),e.latLng.lng());
+    });
+
+
   }
 
-  // Save a new location to Firebase and center the map
-  addNewLocation(lat, lng, timestamp) {
+  geolocateMe(){
+    var options = { enableHighAccuracy: true  ,timeout: 15000,  maximumAge: 3600};
+
+    this.geolocation.getCurrentPosition(options).then(position => {
+      const current_location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude); 
+      this.loadmap(position.coords.latitude,position.coords.longitude, this.mapEle);   
+      this.getAddress(position.coords.latitude, position.coords.longitude);
+    }).catch((error) => {
+      console.log('Error getting current location', error);
+      this.setDefaultpoisition();
+    }).finally(() =>   console.log('Finallay getting current location'));
+    
+  }
+
+  save(){
+    
+    this.util.show();
+    var self=this;
+
     this.locationsCollection.add({
-      lat,
-      lng,
-      timestamp
+      lat:this.lat,
+      lng:this.lng,
+      address:this.address,
+      timestamp:new Date().getTime(),
+    }).then(function(snapshot) {
+      self.util.hide();
+      self.util.showToast("Location saved successfully",'success','bottom');
+      console.log("your location saved");                
+      self.saveflag=false;      
+    }).catch(function(error) {
+      console.log(error);
+      self.util.hide();
+      self.util.errorToast("Failed to save Location!");
+      
     });
- 
-    let position = new google.maps.LatLng(lat, lng);
-    this.map.setCenter(position);
-    this.map.setZoom(13);
-  }
- 
-  // Delete a location from Firebase
-  deleteLocation(pos) {
-    this.locationsCollection.doc(pos.id).delete();
-  }
 
-  // Redraw all markers on the map
-  updateMap(locations) {
-    // Remove all current marker
-    this.markers.map(marker => marker.setMap(null));
-    this.markers = [];
+  }
+  // // Save a new location to Firebase and center the map
+  // addNewLocation(lat, lng, timestamp) {
+  //   this.locationsCollection.add({
+  //     lat,
+  //     lng,
+  //     timestamp
+  //   });
  
-    for (let loc of locations) {
-      let latLng = new google.maps.LatLng(loc.lat, loc.lng);
+  //   let position = new google.maps.LatLng(lat, lng);
+  //   this.map.setCenter(position);
+  //   this.map.setZoom(13);
+  // }
  
-      let marker = new google.maps.Marker({
-        map: this.map,
-        animation: google.maps.Animation.DROP,
-        position: latLng
-      });
-      this.markers.push(marker);
-    }
-}
+  // // Delete a location from Firebase
+  // deleteLocation(pos) {
+  //   this.locationsCollection.doc(pos.id).delete();
+  // }
+
+  // // Redraw all markers on the map
+  // updateMap(locations) {
+  //   // Remove all current marker
+  //   this.markers.map(marker => marker.setMap(null));
+  //   this.markers = [];
+ 
+  //   for (let loc of locations) {
+  //     let latLng = new google.maps.LatLng(loc.lat, loc.lng);
+ 
+  //     let marker = new google.maps.Marker({
+  //       map: this.map,
+  //       animation: google.maps.Animation.DROP,
+  //       position: latLng
+  //     });
+  //     this.markers.push(marker);
+  //   }
+  // }
 
 }

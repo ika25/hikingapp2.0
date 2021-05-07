@@ -70,4 +70,11 @@ export class CaloriesService {
             )
         );
     }
+
+    public delete_hike(userId,hikeId) {
+        this.db.object('/favorite/' + userId + '/' + hikeId).remove();
+
+        return this.db.object('/NewHikeSpot/' + hikeId).remove();
+    }
+
 }

@@ -1,20 +1,13 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-
-import { Plugins } from '@capacitor/core';
-
 import firebase from 'firebase/app';
+import { NavController } from '@ionic/angular';
+
+import { UtilService } from '../../services/util.service';
+import { AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
+import { MapPage} from '../map/map.page';
+import { ModalController } from '@ionic/angular';
 import 'firebase/auth';
 import 'firebase/firestore';
-
-import {
-  AngularFirestore,
-  AngularFirestoreCollection
-} from '@angular/fire/firestore';
-
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
-const { Geolocation } = Plugins;
 
 declare var google;
 
@@ -28,93 +21,133 @@ declare var google;
 export class HistoryPage{
 
   user = null;
-
-  // Map related
-  @ViewChild('map') mapElement: ElementRef;
-  map: any;
-  markers = [];
-
   pathTravelled : any ;
 
-  // Firebase Data
-  locations: Observable<any>;
-  locationsCollection: AngularFirestoreCollection<any>;
+  myaddress: any[] = [];
+  dummy = Array(10);
 
-  currentMapTrack = null;
-
-  constructor(private afs: AngularFirestore) { 
+  constructor(private afs: AngularFirestore,     private navCtrl: NavController, public util: UtilService,public modalController: ModalController,) { 
     this.anonLogin();
   }
 
   ionViewWillEnter() {
-    this.loadMap();
+    
+  }
+
+  go_back(){
+    this.navCtrl.back();
   }
 
   // Perform an anonymous login and load data
   anonLogin() {
     firebase.auth().onAuthStateChanged(user => { 
       this.user = user;
-      
-      this.locationsCollection = this.afs.collection(
-        `locations/${this.user.uid}/track`,
-        ref => ref.orderBy('timestamp')
-      );
- 
-      // Make sure we also get the Firebase item ID!
-      this.locations = this.locationsCollection.snapshotChanges().pipe(
-        map(actions =>
-          actions.map(a => {
-            const data = a.payload.doc.data();
-            const id = a.payload.doc.id;
-            return { id, ...data };
-          })
-        )
-      );
- 
-      // Update Map marker on every change
-      this.locations.subscribe(locations => {
-        this.redrawPath(locations);
-      });
+
+      this.get_locationlist();
       
     });
   }
 
-  // Initialize a blank map
-  loadMap() {
-    Geolocation.getCurrentPosition({ enableHighAccuracy: true,  timeout: 100000 }).then((position) => {
-      //console.log(position);
-      const latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      const mapOptions = {
-        center: latLng, 
-        zoom: 3,
-        //mapTypeId: "terrain"
-      };
-      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-      
-    }, (err) => {
+  get_locationlist(){
+    this.getMyAddress_api(this.user.uid).then((data) => {
+      console.log('my address', data);
+      this.dummy = [];
+      this.myaddress=[];
+      if (data && data.length>0) {
+        this.myaddress = data;
+      }
+      console.log(this.myaddress);
 
-      console.log(err);
-      
-    });
-    
+    }, error => {
+      console.log(error);
+      this.dummy = [];
+    }).catch(error => {
+      console.log(error);
+      this.dummy = [];
+    });      
   }
 
-  redrawPath(locations) {
-    const hikeCoordinates = [];
-    for (let loc of locations) {
-      hikeCoordinates.push({lat : loc.lat, lng : loc.lng});
-    }
-    
-    console.log(hikeCoordinates);
-      this.currentMapTrack = new google.maps.Polyline({
-        path: hikeCoordinates,
-        geodesic: true,
-        strokeColor: '#ff00ff',
-        strokeOpacity: 1.0,
-        strokeWeight: 3
+
+   getMyAddress_api(uid: any): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.afs.collection('locations').doc(uid).collection('track', ref => ref.orderBy('timestamp','desc')).get().subscribe((data) => {
+        var addresses = data.docs.map(doc => {
+          var item = doc.data();
+          item.id = doc.id;
+          return item;
+        });
+        resolve(addresses);
+      }, error => {
+        reject(error);
       });
-      this.currentMapTrack.setMap(this.map);
-    
+    });
   }
+
+  del(item){
+    console.log(item);
+    this.util.show("Delete...");
+    this.deleteAddress_api(this.user.uid, item.id).then(data => {
+      this.util.hide();
+      this.util.showToast("Location deleted successfully",'success','bottom');
+
+      this.get_locationlist();
+    }).catch(error => {
+      console.log(error);
+      this.util.errorToast("Failed to delete a Location!");
+      this.util.hide();
+    });
+  }
+
+  deleteAddress_api(uid, id): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.afs.collection('locations').doc(uid).collection('track').doc(id).delete().then((data) => {
+        resolve(data);
+      }, error => {
+        reject(error);
+      }).catch(error => {
+        reject(error);
+      });
+    });
+  }
+
+  async open_map(item){
+    console.log(item);
+
+    const modal = await this.modalController.create({
+      component: MapPage,
+      cssClass: 'modal-css-height-100',
+     // showBackdrop: true,
+      backdropDismiss: false,
+      componentProps: {
+        'lat': item.lat,
+        'lng': item.lng,
+      }
+    });
+
+    modal.onDidDismiss().then((dataReturned) => {
+
+    });
+      await modal.present().then(() => {
+    });
+  }
+
+  
+  // redrawPath(locations) {
+  //   const hikeCoordinates = [];
+  //   for (let loc of locations) {
+  //     hikeCoordinates.push({lat : loc.lat, lng : loc.lng});
+  //   }
+    
+  //   console.log(hikeCoordinates);
+  //     this.currentMapTrack = new google.maps.Polyline({
+  //       path: hikeCoordinates,
+  //       geodesic: true,
+  //       strokeColor: '#ff00ff',
+  //       strokeOpacity: 1.0,
+  //       strokeWeight: 3
+  //     });
+  //     this.currentMapTrack.setMap(this.map);
+    
+  // }
 
 }

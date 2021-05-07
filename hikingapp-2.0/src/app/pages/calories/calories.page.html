@@ -25,7 +25,7 @@
       <ion-row>
         <ion-col size="10">
           <ion-card-subtitle>Level: {{item.data.level}}</ion-card-subtitle>
-          <ion-card-title>{{item.data.name}}</ion-card-title>
+          <ion-card-title style="font-size: larger;">{{item.data.name}}</ion-card-title>
         </ion-col>
         <ion-col size="2">
           <a class="favorite" (click)="markAsFavorite(item.key, item.data.isFav)">
@@ -53,7 +53,11 @@
               <h3> Ends:{{item.data.ends}}</h3>
             </ion-text>
           </ion-label>
-          <ion-button fill="outline" slot="end" (click)="updateHikingPlace(item.key)">View</ion-button>
+          <div style="display: grid;">
+            <ion-button fill="outline"  (click)="updateHikingPlace(item.key)">View</ion-button>
+            <ion-button fill="outline" color="danger" (click)="del(item.key)">Delete</ion-button>
+          </div>       
+
         </ion-item>
       </ion-list>
     </ion-card-content>

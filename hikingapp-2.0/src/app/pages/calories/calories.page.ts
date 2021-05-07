@@ -16,7 +16,7 @@ import { NewHikeSpot } from '../addnewhike/NewHikeSpot';
 export class CaloriesPage implements OnInit {
 
   public caloriesList: NewHikeSpot[];
-  constructor(private route: Router, private caloriesService: CaloriesService, public user: UserService,) { }
+  constructor(private route: Router, private caloriesService: CaloriesService, public user: UserService) { }
 
   ngOnInit() {
     let user = this.user.getUID();
@@ -57,4 +57,15 @@ export class CaloriesPage implements OnInit {
       });
     });
   }
+
+  del(hikeId){
+    console.log(hikeId);
+    let user = this.user.getUID();
+
+    this.caloriesService.delete_hike(user,hikeId).then(res => {
+
+    }); 
+  }
+
+
 }

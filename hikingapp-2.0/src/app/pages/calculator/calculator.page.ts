@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { NavController } from '@ionic/angular';
 
 // calculator functionality to display the calculate calories function
 @Component({
@@ -11,7 +12,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class CalculatorPage implements OnInit {
   ionicForm: FormGroup;
 
-  constructor(public alertController: AlertController,public formBuilder: FormBuilder) {}
+  constructor(public alertController: AlertController,   private navCtrl: NavController,public formBuilder: FormBuilder) {}
   ngOnInit(): void {
 
 
@@ -22,7 +23,10 @@ export class CalculatorPage implements OnInit {
     })
     
   } 
-  
+  go_back(){
+    this.navCtrl.back();
+  }
+
  
  // This is to simulate caloires burned calculation . The algorithm may not be accurate
 
