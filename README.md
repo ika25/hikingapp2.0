@@ -26,8 +26,10 @@ This application is based on Ionic & Angular User interface integrated with Fire
 ![systemview](https://user-images.githubusercontent.com/16356275/117711526-45a74680-b1cb-11eb-8ba1-6752d1e32a21.png)
 
 # About the Project
-The major feature of the aplication is that the user can
-
+Hike Ireland application developed in ionic 5, Application is design to find hike locations. in this application user will find it easy to search for locations usign
+Google Maps and add them into their list of favoriet destinations. Application comes with some fun features that user can explore and experiance with.
+****
+#### The major feature of the aplication is that the user can:
 1. Sign up 
 2. Login 
 3. Add to Favorite 
@@ -47,8 +49,13 @@ The major feature of the aplication is that the user can
 17. Settings 
 ***
 
-## Installation
+## How set up project folder
 
+- clone project repo into your system.
+- cd into project folder.
+- and run below commands in powershell
+
+##### Installation
 ```sh
 npm install 
 ```
