@@ -78,23 +78,6 @@ export class FeedPage {
         `locations/${this.user.uid}/track`,
         ref => ref.orderBy('timestamp')
       );
- 
-      // // Make sure we also get the Firebase item ID!
-      // this.locations = this.locationsCollection.snapshotChanges().pipe(
-      //   map(actions =>
-      //     actions.map(a => {
-      //       const data = a.payload.doc.data();
-      //       const id = a.payload.doc.id;
-      //       return { id, ...data };
-      //     })
-      //   )
-      // );
- 
-      // // Update Map marker on every change
-      // this.locations.subscribe(locations => {
-      //   this.updateMap(locations);
-      //   this.loc=locations;
-      // });
     });
   }
 
@@ -244,40 +227,5 @@ export class FeedPage {
     });
 
   }
-  // // Save a new location to Firebase and center the map
-  // addNewLocation(lat, lng, timestamp) {
-  //   this.locationsCollection.add({
-  //     lat,
-  //     lng,
-  //     timestamp
-  //   });
- 
-  //   let position = new google.maps.LatLng(lat, lng);
-  //   this.map.setCenter(position);
-  //   this.map.setZoom(13);
-  // }
- 
-  // // Delete a location from Firebase
-  // deleteLocation(pos) {
-  //   this.locationsCollection.doc(pos.id).delete();
-  // }
-
-  // // Redraw all markers on the map
-  // updateMap(locations) {
-  //   // Remove all current marker
-  //   this.markers.map(marker => marker.setMap(null));
-  //   this.markers = [];
- 
-  //   for (let loc of locations) {
-  //     let latLng = new google.maps.LatLng(loc.lat, loc.lng);
- 
-  //     let marker = new google.maps.Marker({
-  //       map: this.map,
-  //       animation: google.maps.Animation.DROP,
-  //       position: latLng
-  //     });
-  //     this.markers.push(marker);
-  //   }
-  // }
 
 }

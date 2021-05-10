@@ -130,24 +130,4 @@ export class HistoryPage{
       await modal.present().then(() => {
     });
   }
-
-  
-  // redrawPath(locations) {
-  //   const hikeCoordinates = [];
-  //   for (let loc of locations) {
-  //     hikeCoordinates.push({lat : loc.lat, lng : loc.lng});
-  //   }
-    
-  //   console.log(hikeCoordinates);
-  //     this.currentMapTrack = new google.maps.Polyline({
-  //       path: hikeCoordinates,
-  //       geodesic: true,
-  //       strokeColor: '#ff00ff',
-  //       strokeOpacity: 1.0,
-  //       strokeWeight: 3
-  //     });
-  //     this.currentMapTrack.setMap(this.map);
-    
-  // }
-
 }

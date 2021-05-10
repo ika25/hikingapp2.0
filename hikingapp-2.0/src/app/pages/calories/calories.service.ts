@@ -25,27 +25,6 @@ export class CaloriesService {
             )
         );
         return this.NewHikeSpotListRef;
-        // this.NewHikeSpotListRef.subscribe(res => {
-        //     console.log(res)
-        //     console.log('resp,....')
-        // })
-        // console.log(NewHikeSpotListRef)
-        // let data = NewHikeSpotListRef.snapshotChanges().pipe(map(changes => {
-        //     console.log('ddddd')
-        //     console.log(changes)
-        //     // return changes.map(c => ({ key: c.payload.key }));
-        // }));
-        console.log(":data...................")
-        // let data = NewHikeSpotListRef.snapshotChanges().pipe(
-        //     map(actions =>
-        //         actions.map(a => {
-        //             const data = a.payload.doc.data();
-        //             const id = a.payload.doc.id;
-        //             return { id, ...data };
-        //         })
-        //     )
-        // );
-        // console.log(data)
     }
 
 
@@ -70,7 +49,7 @@ export class CaloriesService {
             )
         );
     }
-
+    // This is function to delete hike from the list
     public delete_hike(userId,hikeId) {
         this.db.object('/favorite/' + userId + '/' + hikeId).remove();
 

@@ -30,7 +30,7 @@ export class SignupPage implements OnInit {
     });
   }
 
-  // create the account of the customer
+  // create the account of the user
   createAccount(): void {
     console.log('form', this.registerForm.value);
     let email: string = this.registerForm.value['email'];

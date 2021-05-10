@@ -10,8 +10,8 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 
 
-// profile page to display the profiles fo the customer.
-// customer can update the profile page.
+// profile page to display the profiles fo the user.
+// user can update the profile page.
 export class ProfilePage implements OnInit {
 
   current_pass; new_pass; confirm_pass
