@@ -26,19 +26,19 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('./finds/finds.module').then(m => m.FindsPageModule)
+            loadChildren: () => import('./offers/offers.module').then(m => m.OffersPageModule)
           },
           {
             path: 'new',
-            loadChildren: () => import('./finds/new-finds/new-finds.module').then(m => m.NewFindsPageModule)
+            loadChildren: () => import('./offers/new-offer/new-offer.module').then(m => m.NewOfferPageModule)
           },
           {
             path: 'edit/:placeId',
-            loadChildren: () => import('./finds/edit-finds/edit-finds.module').then(m => m.EditFindsPageModule)
+            loadChildren: () => import('./offers/edit-offer/edit-offer.module').then(m => m.EditOfferPageModule)
           },
           {
             path: ':placeId',
-            loadChildren: () => import('./finds/find-bookmarks/find-bookmarks.module').then(m => m.FindBookmarksPageModule)
+            loadChildren: () => import('./offers/offer-bookings/offer-bookings.module').then(m => m.OfferBookingsPageModule)
           }
         ]
       },
