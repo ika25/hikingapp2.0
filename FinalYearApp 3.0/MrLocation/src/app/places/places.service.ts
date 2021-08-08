@@ -35,4 +35,14 @@ export class PlacesService {
   }
 
   constructor() {}
+
+
+  /*
+  In this function we will pass in the ID of the Plcae and then return this places, accessing our private places array,
+  will clone that entire object by using the spread operator and then we pull out all the properties of the place object we retrieved here and add them into a
+  new object so that if we now were to add it, this object, we wouldn't edit the original object.
+  */
+  getPlace(id: string) {
+    return {...this._places.find(p => p.id === id)};
+  }
 }

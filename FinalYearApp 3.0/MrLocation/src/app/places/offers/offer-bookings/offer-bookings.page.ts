@@ -19,6 +19,10 @@ export class OfferBookingsPage implements OnInit {
     private placesService: PlacesService
   ) {}
 
+   /*
+  This function will automatically update even if you are coming back from anther page that did change
+  that selcted place ID because that subscription that listens to change in the URLs will always be live
+  */
   ngOnInit() {
     this.route.paramMap.subscribe(paramMap => {
       if (!paramMap.has('placeId')) {
