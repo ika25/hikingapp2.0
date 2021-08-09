@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'bookmarks',
-    loadChildren: () => import('./bookmarks/bookmarks.module').then( m => m.BookmarksPageModule)
+    loadChildren: () => import('./bookings/bookings.module').then( m => m.BookingsPageModule)
   },
 ];
 
