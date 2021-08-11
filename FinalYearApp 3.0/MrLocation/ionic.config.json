@@ -1,7 +1,0 @@
-{
-  "name": "MrLocation",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
