@@ -59,16 +59,15 @@ export class CreateBookingComponent implements OnInit {
         bookingData: {
           firstName: this.form.value['first-name'],
           lastName: this.form.value['last-name'],
-          guestNumber: this.form.value['guest-number'],
-          startDate: this.form.value['date-from'],
-          endDate: this.form.value['date-to']
+          guestNumber: +this.form.value['guest-number'],
+          startDate: new Date(this.form.value['date-from']),
+          endDate: new Date(this.form.value['date-to'])
         }
       },
       'confirm'
     );
   }
 
-  //
   datesValid() {
     const startDate = new Date(this.form.value['date-from']);//start date that was selected by using this forum value a date - from
     const endDate = new Date(this.form.value['date-to']);//then I want to get my end date in the same way.
