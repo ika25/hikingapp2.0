@@ -24,7 +24,12 @@ export class AddNewHikeService {
       distance: apt.distance,
       starts: apt.starts,
       ends: apt.ends,
-      image: apt.image
+      image: apt.image,
+      uid: apt.uid, // added new
+      start_lat: apt.start_lat, // added new
+      start_lng: apt.start_lng, // added new
+      end_lat: apt.end_lat, // added new
+      end_lng: apt.end_lng // added new
     })
   } 
 
@@ -48,7 +53,12 @@ export class AddNewHikeService {
       distance: apt.distance,
       starts: apt.starts,
       ends: apt.ends,
-      image: apt.image
+      image: apt.image,
+      uid: apt.uid, // added new
+      start_lat: apt.start_lat, // added new
+      start_lng: apt.start_lng, // added new
+      end_lat: apt.end_lat, // added new
+      end_lng: apt.end_lng // added new
     });
     // return this.NewHikeSpotRef.update({
     //   name: apt.name,

@@ -9,12 +9,14 @@ android {
 
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
-
-
+    implementation project(':capacitor-camera')
+    implementation project(':capacitor-filesystem')
+    implementation "com.squareup.okhttp3:okhttp:3.12.0"
+    implementation "com.android.support:support-v4:27.+"
 }
 apply from: "../../node_modules/cordova-androidx-build/src/android/cordova-androidx-build.gradle"
-apply from: "../../node_modules/cordova-plugin-googlemaps/src/android/frameworks/tbxml-android.gradle"
-apply from: "../../node_modules/cordova-plugin-googlemaps/src/android/frameworks/pgm-custom.gradle"
+apply from: "../../node_modules/com-sarriaroman-photoviewer/src/android/photoviewer.gradle"
+apply from: "../../node_modules/cordova-android-support-gradle-release/cordova-android-support-gradle-release.gradle"
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()

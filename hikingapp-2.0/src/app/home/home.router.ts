@@ -17,15 +17,15 @@ const routes: Routes = [
           }
         ]
       },
-      {
-        path: 'places',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('../pages/places/places.module').then(m => m.PlacesPageModule)
-          }
-        ]
-      }, 
+      // {
+      //   path: 'places',
+      //   children: [
+      //     {
+      //       path: '',
+      //       loadChildren: () => import('../pages/places/places.module').then(m => m.PlacesPageModule)
+      //     }
+      //   ]
+      // }, 
       {
         path: 'calories',
         children: [

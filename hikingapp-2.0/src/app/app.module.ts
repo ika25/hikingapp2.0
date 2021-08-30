@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -32,6 +32,11 @@ import { StreamingMedia } from '@ionic-native/streaming-media/ngx';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 import { ServicesModule } from './services/services.module';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import {
+  LaunchNavigator,
+  LaunchNavigatorOptions
+} from "@ionic-native/launch-navigator/ngx";
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
 import '@ungap/global-this';
 
@@ -68,9 +73,11 @@ import '@ungap/global-this';
     StreamingMedia,
     PhotoViewer,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
-
+    LaunchNavigator,
+    NativeGeocoder
   ],
   entryComponents: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

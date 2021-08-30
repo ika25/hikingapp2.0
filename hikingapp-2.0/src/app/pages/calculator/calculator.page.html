@@ -1,71 +1,70 @@
-  
 <ion-header>
   <ion-toolbar class="header-color">
     <ion-buttons slot="start" (click)="go_back()">
-      <ion-icon slot="icon-only" mode="md" name="arrow-back-outline"   style="color: #3f3d56;"></ion-icon>
+      <ion-icon slot="icon-only" mode="md" name="arrow-back-outline" style="color: #3f3d56;"></ion-icon>
     </ion-buttons>
     <ion-title>
       Estimated Calories
-     </ion-title>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form  #form="ngForm" >
-  <ion-list lines="full"> 
-  
-<ion-row>
-  <ion-col position="floating" class="testclass">
-      <ion-item>
-        <ion-label>Age</ion-label>
-        <ion-input type="text" [(ngModel)]="age" name="age" id="age"></ion-input>
-      </ion-item>
-    </ion-col>
-</ion-row>
+  <form #form="ngForm">
+    <ion-list lines="full">
 
-<ion-row>
-  <ion-col>
-  <ion-item>
-    
-    <ion-label position="floating" class="testclass">Your Weight</ion-label>
-    <ion-input type="text" [(ngModel)]="weight"  name="weight" id="weight" value="weight"></ion-input>
-  </ion-item> 
-</ion-col>
+      <ion-row>
+        <ion-col position="floating" class="testclass">
+          <ion-item>
+            <ion-label>Age</ion-label>
+            <ion-input type="text" [(ngModel)]="age" name="age" id="age"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
 
-<ion-col>
-  <ion-item>
-    <ion-label position="floating" class="testclass">Your Height</ion-label>
-    <ion-input type="text" [(ngModel)]="height" name="height" id="height" value="height"></ion-input>
-  </ion-item> 
-  </ion-col> 
-</ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
 
-<ion-radio-group [(ngModel)]="gender" value="gender" name="gender"> 
-  <ion-row>
-    <ion-col>
-  <ion-list-header>
-    <ion-label>Gender</ion-label>
-  </ion-list-header>
-</ion-col> 
-</ion-row>
-<ion-row>
-<ion-col>
-  <ion-item>
-    <ion-label>Male</ion-label>
-    <ion-radio slot="start" name="gender" color="success" value="male"></ion-radio>
-  </ion-item> 
-</ion-col>
+            <ion-label position="floating" class="testclass">Your Weight</ion-label>
+            <ion-input type="text" [(ngModel)]="weight" name="weight" id="weight" value="weight"></ion-input>
+          </ion-item>
+        </ion-col>
 
-<ion-col>
-  <ion-item>
-    <ion-label>Female</ion-label>
-    <ion-radio slot="start" name = "gender" color="tertiary" value="female"></ion-radio>
-  </ion-item> 
-</ion-col> 
-</ion-row> 
-</ion-radio-group> 
-  </ion-list>
-  <!-- <ion-radio-group value="Miles">
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating" class="testclass">Your Height</ion-label>
+            <ion-input type="text" [(ngModel)]="height" name="height" id="height" value="height"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-radio-group [(ngModel)]="gender" value="gender" name="gender">
+        <ion-row>
+          <ion-col>
+            <ion-list-header>
+              <ion-label>Gender</ion-label>
+            </ion-list-header>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Male</ion-label>
+              <ion-radio slot="start" name="gender" color="success" value="male"></ion-radio>
+            </ion-item>
+          </ion-col>
+
+          <ion-col>
+            <ion-item>
+              <ion-label>Female</ion-label>
+              <ion-radio slot="start" name="gender" color="tertiary" value="female"></ion-radio>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-radio-group>
+    </ion-list>
+    <!-- <ion-radio-group value="Miles">
     <ion-row>
       <ion-col>
     <ion-list-header>
@@ -88,32 +87,34 @@
   </ion-col>
 </ion-row>
   </ion-radio-group> -->
-  <ion-row>
-    <ion-col>
+    <ion-row>
+      <ion-col>
         <ion-list-header>
           <ion-label>Activity</ion-label>
         </ion-list-header>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <ion-item>
-        <ion-select [(ngModel)]="activity" name="activity" class="" interface="action-sheet" >
-          <ion-select-option value="1">Basal Metabolic Rate (BMR)</ion-select-option>
-          <ion-select-option value="1.2">Seddentary: little or no exercise</ion-select-option>
-          <ion-select-option value="1.375">Light: exercise 1-3 times/week</ion-select-option>
-          <ion-select-option value="1.465">Moderate:exercise 4-5 times/week</ion-select-option>
-          <ion-select-option value="1.55">Active: daily exercise or intense exercise 3-4 times/week</ion-select-option>
-          <ion-select-option value="1.725">Very Active: intense exercise 6-7 times/week</ion-select-option>
-          <ion-select-option value="1.9">Extra Active: very intese exercise daily, or physical job</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-  <ion-button expand="block" share="round" color="success" (click)="presentAlertConfirm(form)">Calculate</ion-button>
-    
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-select [(ngModel)]="activity" name="activity" class="" interface="action-sheet">
+            <ion-select-option value="1">Basal Metabolic Rate (BMR)</ion-select-option>
+            <ion-select-option value="1.2">Seddentary: little or no exercise</ion-select-option>
+            <ion-select-option value="1.375">Light: exercise 1-3 times/week</ion-select-option>
+            <ion-select-option value="1.465">Moderate:exercise 4-5 times/week</ion-select-option>
+            <ion-select-option value="1.55">Active: daily exercise or intense exercise 3-4 times/week
+            </ion-select-option>
+            <ion-select-option value="1.725">Very Active: intense exercise 6-7 times/week</ion-select-option>
+            <ion-select-option value="1.9">Extra Active: very intese exercise daily, or physical job</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-button expand="block" share="round" color="success" (click)="presentAlertConfirm(form)">Calculate</ion-button>
+
   </form>
 </ion-content>
+
 <script>
   const button = document.querySelector('ion-button');
   button.addEventListener('click', handleButtonClick);

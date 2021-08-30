@@ -3,7 +3,7 @@ import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@io
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { UtilService } from '../../services/util.service';
-
+import { UserService } from 'src/app/services/user/user.service';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
@@ -43,7 +43,7 @@ export class FeedPage {
   locationsCollection: AngularFirestoreCollection<any>;
   user = null;
   
-  constructor(private route: Router,private afs: AngularFirestore,    public util: UtilService,  private ngZone: NgZone,  public geolocation: Geolocation  ) {
+  constructor(private route: Router,private afs: AngularFirestore,    public util: UtilService,  private ngZone: NgZone,  public geolocation: Geolocation, private userService: UserService  ) {
     this.anonLogin();
     this.lat= 53.34507319942192;
 		this.lng=-6.254235003125004;
@@ -56,29 +56,41 @@ export class FeedPage {
 
   // Perform an anonymous login and load data
   anonLogin() {
-    firebase.auth().onAuthStateChanged(user => { 
-      this.user = user;
-
-       
-      console.log('userid is  '+this.user)
-      
-    if (this.user === null) {
-        console.log(user + ' === null . User has to login ');
-        this.route.navigate(['login']);
-        return;
-    }
-    if (this.user == null) {
-      console.log(user + '  uid === null . User has to login ');
+    this.user = this.userService.user;
+    console.log('user == ', this.user);
+    
+    if (!this.user) {
       this.route.navigate(['login']);
       return;
-   }
+    }
+
+    this.locationsCollection = this.afs.collection(
+      `locations/${this.user.uid}/track`,
+      ref => ref.orderBy('timestamp')
+    );
+  //   firebase.auth().onAuthStateChanged(user => { 
+  //     this.user = user;
+
+       
+  //     console.log('userid is  '+this.user)
+      
+  //   if (this.user === null) {
+  //       console.log(user + ' === null . User has to login ');
+  //       this.route.navigate(['login']);
+  //       return;
+  //   }
+  //   if (this.user == null) {
+  //     console.log(user + '  uid === null . User has to login ');
+  //     this.route.navigate(['login']);
+  //     return;
+  //  }
  
  
-      this.locationsCollection = this.afs.collection(
-        `locations/${this.user.uid}/track`,
-        ref => ref.orderBy('timestamp')
-      );
-    });
+  //     this.locationsCollection = this.afs.collection(
+  //       `locations/${this.user.uid}/track`,
+  //       ref => ref.orderBy('timestamp')
+  //     );
+  //   });
   }
 
   getUserPosition(){

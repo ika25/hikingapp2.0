@@ -7,7 +7,8 @@ import { AlertController } from '@ionic/angular';
 import { CommonService } from 'src/app/services/util/common.services';
 import { CaloriesService } from './calories.service';
 import { NewHikeSpot } from '../addnewhike/NewHikeSpot';
- 
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 @Component({
   selector: 'app-calories',
   templateUrl: './calories.page.html',
@@ -16,13 +17,18 @@ import { NewHikeSpot } from '../addnewhike/NewHikeSpot';
 export class CaloriesPage implements OnInit {
 
   public caloriesList: NewHikeSpot[];
-  constructor(private route: Router, private caloriesService: CaloriesService, public user: UserService) { }
+  constructor(private route: Router, private caloriesService: CaloriesService, public user: UserService, private geolocation: Geolocation) { }
 
   ngOnInit() {
     let user = this.user.getUID();
     this.caloriesService.getHikeSpotList().subscribe(res => {
       this.caloriesList = res;
       this.getFavoriteList(user);
+    });
+
+    this.geolocation.getCurrentPosition().then(geo => {
+      this.user.lat = geo.coords.latitude
+      this.user.lng = geo.coords.longitude
     });
   }
 

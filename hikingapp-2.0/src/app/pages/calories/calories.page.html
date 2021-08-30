@@ -2,24 +2,17 @@
   <ion-toolbar class="header-color">
     <ion-title> Home</ion-title>
     <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
-    <ion-buttons slot="start">
-      <ion-menu-button menu="setting"></ion-menu-button>
-    </ion-buttons>
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button menu="setting" color="light"></ion-menu-button>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
 
-<ion-content id='hotspots' [scrollEvents]="true">
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="addNewHikingPlace()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+<ion-content id="hotspots" [scrollEvents]="true">  
 
-  <br>
-  <br>
   <ion-card *ngFor="let item of caloriesList">
     <ion-card-header>
       <ion-row>
@@ -44,7 +37,7 @@
           </ion-thumbnail>
           <ion-label>
             <ion-text color="danger">
-              <h3> Distance: {{item.data.distance}} miles</h3>
+              <h3> Distance: {{item.data.distance}} km</h3>
             </ion-text>
             <ion-text color="primary">
               <h3> Starts: {{item.data.starts}}</h3>
@@ -54,17 +47,26 @@
             </ion-text>
           </ion-label>
           <div style="display: grid;">
-            <ion-button fill="outline"  (click)="updateHikingPlace(item.key)">View</ion-button>
+            <ion-button fill="outline" (click)="updateHikingPlace(item.key)">View</ion-button>
             <ion-button fill="outline" color="danger" (click)="del(item.key)">Delete</ion-button>
-          </div>       
+          </div>
 
         </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
 
+  <br>
+  <br>
 
-  <!-- <ion-content id='hotspots' [scrollEvents]="true"> 
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addNewHikingPlace()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<!-- <ion-content id='hotspots' [scrollEvents]="true"> 
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>Level: Easy</ion-card-subtitle>

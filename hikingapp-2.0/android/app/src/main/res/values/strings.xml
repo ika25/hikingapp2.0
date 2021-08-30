@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Hikeireland</string>
+    <string name="title_activity_main">Hikeireland</string>
+    <string name="package_name">com.hikeireland.app</string>
+    <string name="custom_url_scheme">com.hikeireland.app</string>
+</resources>

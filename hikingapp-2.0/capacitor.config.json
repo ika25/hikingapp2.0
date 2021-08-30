@@ -1,6 +1,6 @@
 {
   "appId": "com.hikeireland.app",
-  "appName": "hikeireland",
+  "appName": "Hikeireland",
   "webDir": "www",
   "npmClient": "npm",
   "cordova": {
@@ -10,10 +10,10 @@
       "android-targetSdkVersion": "29",
       "BackupWebStorage": "none",
       "SplashMaintainAspectRatio": "true",
-      "FadeSplashScreenDuration": "600",
+      "FadeSplashScreenDuration": "1000",
       "SplashShowOnlyFirstTime": "false",
       "SplashScreen": "screen",
-      "SplashScreenDelay": "3000",
+      "SplashScreenDelay": "10000",
       "loadUrlTimeoutValue": "700000",
       "GOOGLE_MAPS_ANDROID_API_KEY": "AIzaSyD6wz-2LPTEqkqAtgA_0Mk-IIraeM7WvoQ"
     }

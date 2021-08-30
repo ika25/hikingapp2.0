@@ -1,3 +1,4 @@
+import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
 import { NewHikeSpot } from '../addnewhike/NewHikeSpot';
@@ -12,7 +13,8 @@ import { CaloriesService } from '../calories/calories.service';
 export class FavoritesPage implements OnInit {
 
   public favoriteList: NewHikeSpot[] = [];
-  constructor(private caloriesService: CaloriesService, public user: UserService) { }
+  constructor(private caloriesService: CaloriesService, public user: UserService,
+    private navCtrl: NavController) { }
 
   ngOnInit() {
     let user = this.user.getUID();
@@ -36,5 +38,9 @@ export class FavoritesPage implements OnInit {
     let user = this.user.getUID();
     this.caloriesService.markUnFavorite(user, hike['key']).then(re => {
     });
+  }
+
+  go_back() {
+    this.navCtrl.back();
   }
 }

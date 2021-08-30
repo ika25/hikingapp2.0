@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { MapPage } from './../map/map.page';
+import { Component, NgModuleFactoryLoader, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { AddNewHikeService } from './addnewhikeservice';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { finalize, map, takeUntil } from 'rxjs/operators';
-import { ToastController } from '@ionic/angular';
+import { ToastController, ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+import { UserService } from 'src/app/services/user/user.service';
 
 // add new hike functionality, when user clicks plus button from home screen 
 //add new hike feature is invoked.
@@ -24,6 +27,13 @@ export class AddnewhikePage implements OnInit {
   public isEditMode = false;
   public existingImage = '';
 
+  uid: string;
+  start_lat: any;
+  start_lng: any;
+  end_lat: any;
+  end_lng: any;
+  calorieData: any;
+
   constructor(
     private storage: AngularFireStorage,
     private addnewService: AddNewHikeService,
@@ -31,11 +41,14 @@ export class AddnewhikePage implements OnInit {
     public fb: FormBuilder,
     private navCtrl: NavController,
     private route: ActivatedRoute,
-    public toastController: ToastController
+    public toastController: ToastController,
+    private stor: Storage,
+    private modalCtrl: ModalController,
+    private userService: UserService
   ) { }
- 
 
-  ionViewWillEnter() {
+
+  async ionViewWillEnter() {
     this.route.params.subscribe(param => {
       if (param['key'] && param['key'] != '') {
         this.editKey = param['key'];
@@ -45,9 +58,10 @@ export class AddnewhikePage implements OnInit {
         this.isEditMode = false;
       }
     });
+    this.uid = await this.stor.get('uid');
   }
 
-  go_back(){
+  go_back() {
     this.navCtrl.back();
   }
 
@@ -59,8 +73,7 @@ export class AddnewhikePage implements OnInit {
       starts: [''],
       ends: [''],
       image: ['', []]
-    })
-    // this.getData("-MRB8K6Zkc_n5b8SFC4q")
+    });
   }
 
   formSubmit() {
@@ -76,6 +89,11 @@ export class AddnewhikePage implements OnInit {
   getData(key) {
     this.addnewService.getNewHikeSpot(key).subscribe(data => {
       this.AddNewForm.patchValue(data);
+      this.calorieData = data;
+      this.start_lat = this.calorieData.start_lat;
+      this.start_lng = this.calorieData.start_lng;
+      this.end_lat = this.calorieData.end_lat
+      this.end_lng = this.calorieData.end_lng
       this.existingImage = data['image'];
     });
   }
@@ -115,15 +133,79 @@ export class AddnewhikePage implements OnInit {
     }
     this.AddNewForm.get('image').setValue(url);
     if (this.isEditMode) {
-      this.addnewService.updateNewHikeSpot(this.editKey, this.AddNewForm.value).then(res => {
+      var data: any = this.AddNewForm.value;
+      // add user's uid, start's lat/lng, end's lat/lng in hike data
+      data['uid'] = this.uid;
+      data['start_lat'] = this.start_lat ? this.start_lat : (this.calorieData?.start_lat ? this.calorieData?.start_lat : this.userService.lat);
+      data['start_lng'] = this.start_lng ? this.start_lng : (this.calorieData?.start_lng ? this.calorieData?.start_lng : this.userService.lng);
+      data['end_lat'] = this.end_lat ? this.end_lat : (this.calorieData?.end_lat ? this.calorieData?.end_lat : this.userService.lat);
+      data['end_lng'] = this.end_lng ? this.end_lng : (this.calorieData?.end_lng ? this.calorieData?.end_lng : this.userService.lng);
+
+      this.addnewService.updateNewHikeSpot(this.editKey, data).then(res => {
         this.AddNewForm.reset();
-        this.router.navigate(['/calories']);
+        this.router.navigate(['/home/calories']);
       }).catch(error => console.log(error));
     } else {
-      this.addnewService.createNewHikeSpot(this.AddNewForm.value).then(res => {
+      // add user's uid, start's lat/lng, end's lat/lng in hike data
+      const data = {
+        uid: this.uid,
+        start_lat: this.start_lat ? this.start_lat : (this.calorieData?.start_lat ? this.calorieData?.start_lat : this.userService.lat),
+        start_lng: this.start_lng ? this.start_lng : (this.calorieData?.start_lng ? this.calorieData?.start_lng : this.userService.lng),
+        end_lat: this.end_lat ? this.end_lat : (this.calorieData?.end_lat ? this.calorieData?.end_lat : this.userService.lat),
+        end_lng: this.end_lng ? this.end_lng : (this.calorieData?.end_lng ? this.calorieData?.end_lng : this.userService.lng),
+        ...this.AddNewForm.value
+      }
+      this.addnewService.createNewHikeSpot(data).then(res => {
         this.AddNewForm.reset();
-        this.router.navigate(['/calories']);
+        this.router.navigate(['/home/calories']);
       }).catch(error => console.log(error));
     }
+  }
+  /**
+   * show map to select location.
+   * @param type 
+   */
+  async showMap(type = '') {
+    var modal = await this.modalCtrl.create({
+      component: MapPage,
+      componentProps: {
+        type,
+        lat: type == 'start' ? (this.calorieData?.start_lat ? this.calorieData?.start_lat : this.userService.lat) : (this.calorieData?.end_lat ? this.calorieData?.end_lat : this.userService.lat),
+        lng: type == 'start' ? (this.calorieData?.start_lng ? this.calorieData?.start_lng : this.userService.lng) : (this.calorieData?.end_lng ? this.calorieData?.end_lng : this.userService.lng)
+      }
+    });
+    modal.onDidDismiss().then(data => {
+      if (data.role == 'selected') {
+        if (type == 'start') {
+          this.start_lat = data.data.lat;
+          this.start_lng = data.data.lng;
+          const dist = this.userService.calcCrow(this.start_lat, this.start_lng, this.end_lat, this.end_lng);
+
+          const formData = {
+            name: this.AddNewForm.value.name,
+            level: this.AddNewForm.value.level,
+            image: this.AddNewForm.value.image,
+            distance: dist,
+            starts: data.data.location // address
+          }
+          this.AddNewForm.patchValue(formData);
+        } else {
+          this.end_lat = data.data.lat;
+          this.end_lng = data.data.lng;
+          const dist = this.userService.calcCrow(this.start_lat, this.start_lng, this.end_lat, this.end_lng);
+
+          const formData = {
+            name: this.AddNewForm.value.name,
+            level: this.AddNewForm.value.level,
+            image: this.AddNewForm.value.image,
+            distance: dist,
+            starts: this.AddNewForm.value.starts,
+            ends: data.data.location // address
+          }
+          this.AddNewForm.patchValue(formData);
+        }
+      }
+    });
+    modal.present();
   }
 }

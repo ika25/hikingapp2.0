@@ -1,21 +1,21 @@
-  input#uploadBtn{
-    // position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-  }
-
-.image-upload{
-    height: 40px;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    left: 20%;
+input#uploadBtn {
+  // position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
 }
 
-.header-color{
+.image-upload {
+  height: 40px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left: 20%;
+}
+
+.header-color {
   --color: #ffffff;
   --background: #cf3c4f;
 }
@@ -29,4 +29,8 @@
 
   /* Set full opacity on the placeholder */
   --placeholder-opacity: 1;
+}
+
+.address_inp {
+  font-size: 13px;
 }

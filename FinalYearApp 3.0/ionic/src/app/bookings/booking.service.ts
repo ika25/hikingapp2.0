@@ -50,6 +50,8 @@ export class BookingService {
     return this.bookings.pipe(
       take(1),
       delay(1000),
+      //compare the ID of the booking I'm currently looking at in this array of bookings and if it's not equal to the booking ID I'm getting as an argument,so to this booking ID, then I will return true here,
+      //If the ID of the booking I'm looking at for the items in the bookings array here,if that is equal to the booking ID I'm getting here though, then this is the booking I want to canceld therefore, this will return false
       tap(bookings => {
         this._bookings.next(bookings.filter(b => b.id !== bookingId));
       })

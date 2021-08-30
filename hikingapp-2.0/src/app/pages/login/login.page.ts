@@ -41,14 +41,14 @@ export class LoginPage implements OnInit {
     console.log('form', this.loginForm.value);
     this.auth.sigin(this.loginForm.value).then(data => {
       console.log('uid sigin: ', JSON.stringify(data.user.uid));
-      this.storage.set('uid', JSON.stringify(data.user.uid)); 
-      this.userService.setUser({
-				username: data.user.displayName,
-				uid: data.user.uid
-			})
-    //  this.router.navigateByUrl('/home/calories');
-      this.router.navigateByUrl('/home/calories');
+      this.storage.set('uid', data.user.uid); // no need JSON.stringify
 
+      this.userService.getUserById(data.user.uid).then(snap => {
+        var userData = snap.val();
+        userData.uid = snap.key;
+        this.userService.setUser(userData);
+        this.router.navigateByUrl('/home/calories');
+      });
     },(reason) => {
       this.uitil.doAlert("Error", reason, "Ok");
       this.router.navigateByUrl('/login');

@@ -39,16 +39,15 @@ export class SignupPage implements OnInit {
     this.auth.createAccount(this.registerForm.value).then(data => {
       console.log('uid account: ', data.user.uid);
       this.userService.setUser({
-        username: data.user.displayName,
+        username: this.registerForm.value.name,
         uid: data.user.uid
       })
-      this.storage.set('uid', JSON.stringify(data.user.uid));
+      this.storage.set('uid', data.user.uid);
       this.userService.createUser(this.registerForm.value);
 
-
-
       this.util.doAlert("Success", msg, "Ok");
-      this.router.navigateByUrl('/login');
+      // this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/home/calories');
     }, (reason) => {
       this.util.doAlert("Error", reason, "Ok")
     });
