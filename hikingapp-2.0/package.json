@@ -29,7 +29,7 @@
     "@ionic-native/camera": "^5.30.0",
     "@ionic-native/core": "^5.22.0-beta-1",
     "@ionic-native/file": "^5.30.0",
-    "@ionic-native/geolocation": "^5.32.1",
+    "@ionic-native/geolocation": "^5.31.1",
     "@ionic-native/image-picker": "^5.30.0",
     "@ionic-native/launch-navigator": "^5.31.1",
     "@ionic-native/media": "^5.30.0",
